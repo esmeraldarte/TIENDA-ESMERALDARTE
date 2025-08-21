@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tienda de Esmeraldas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Esmeraldas de Colombia</h1>
+    <nav>
+      <ul>
+        <li><a href="#" onclick="filtrarCategoria('Anillos')">Anillos</a></li>
+        <li><a href="#" onclick="filtrarCategoria('Aretes')">Aretes</a></li>
+        <li><a href="#" onclick="filtrarCategoria('Pulseras')">Pulseras</a></li>
+        <li><a href="#" onclick="filtrarCategoria('Dijes')">Dijes</a></li>
+      </ul>
+    </nav>
+    <button id="carritoBtn">🛒 Carrito</button>
+  </header>
+
+  <main>
+    <section id="productos"></section>
+  </main>
+
+  <aside id="carrito" class="oculto">
+    <h2>Carrito de Compras</h2>
+    <ul id="listaCarrito"></ul>
+    <p id="subtotal"></p>
+    <p id="envio"></p>
+    <p id="total"></p>
+    <div class="pagos">
+      <a class="btn btn-wompi" target="_blank" href="https://checkout.wompi.co/l/TU_ENLACE">Tarjeta o PSE (Colombia)</a>
+      <a class="btn btn-stripe" target="_blank" href="https://buy.stripe.com/TU_ENLACE">Tarjeta internacional (Stripe)</a>
+      <form action="https://www.paypal.com/ncp/payment/TU_CODIGO" method="post" target="_blank">
+        <input type="submit" value="Pagar con PayPal" class="btn btn-paypal">
+      </form>
+    </div>
+  </aside>
+
+  <a href="https://wa.me/573001112233" class="whatsapp" target="_blank">💬 WhatsApp</a>
+
+  <script src="script.js"></script>
+</body>
+</html>
