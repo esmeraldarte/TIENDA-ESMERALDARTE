@@ -1,46 +1,440 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tienda de Esmeraldas</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Esmeraldas Colombianas | Joyería Certificada</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Estilos personalizados complementarios */
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.5s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .tab-button.active {
+      border-bottom: 3px solid #065f46;
+      color: #065f46;
+      font-weight: 600;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+  </style>
 </head>
-<body>
-  <header>
-    <h1>Esmeraldas de Colombia</h1>
-    <nav>
-      <ul>
-        <li><a href="#" onclick="filtrarCategoria('Anillos')">Anillos</a></li>
-        <li><a href="#" onclick="filtrarCategoria('Aretes')">Aretes</a></li>
-        <li><a href="#" onclick="filtrarCategoria('Pulseras')">Pulseras</a></li>
-        <li><a href="#" onclick="filtrarCategoria('Dijes')">Dijes</a></li>
-      </ul>
-    </nav>
-    <button id="carritoBtn">🛒 Carrito</button>
+<body class="bg-white font-sans">
+  <!-- Header -->
+  <header class="bg-emerald-900 text-white shadow-md">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center">
+        <img src="https://via.placeholder.com/50" alt="Logo" class="h-10 mr-3">
+        <h1 class="text-xl md:text-2xl font-bold">Esmeraldas Colombianas</h1>
+      </div>
+      <nav class="hidden md:block">
+        <ul class="flex space-x-6">
+          <li><a href="#" class="hover:text-emerald-200 transition">Inicio</a></li>
+          <li><a href="#" class="hover:text-emerald-200 transition">Colecciones</a></li>
+          <li><a href="#" class="hover:text-emerald-200 transition">Certificados</a></li>
+          <li><a href="#" class="hover:text-emerald-200 transition">Nosotros</a></li>
+          <li><a href="#" class="hover:text-emerald-200 transition">Contacto</a></li>
+        </ul>
+      </nav>
+      <button class="md:hidden text-2xl">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
   </header>
 
-  <main>
-    <section id="productos"></section>
-  </main>
-
-  <aside id="carrito" class="oculto">
-    <h2>Carrito de Compras</h2>
-    <ul id="listaCarrito"></ul>
-    <p id="subtotal"></p>
-    <p id="envio"></p>
-    <p id="total"></p>
-    <div class="pagos">
-      <a class="btn btn-wompi" target="_blank" href="https://checkout.wompi.co/l/TU_ENLACE">Tarjeta o PSE (Colombia)</a>
-      <a class="btn btn-stripe" target="_blank" href="https://buy.stripe.com/TU_ENLACE">Tarjeta internacional (Stripe)</a>
-      <form action="https://www.paypal.com/ncp/payment/TU_CODIGO" method="post" target="_blank">
-        <input type="submit" value="Pagar con PayPal" class="btn btn-paypal">
-      </form>
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-emerald-800 to-emerald-600 text-white py-16">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl md:text-5xl font-bold mb-4">Esmeraldas Colombianas de Alta Calidad</h2>
+      <p class="text-xl mb-8 max-w-2xl mx-auto">Descubre nuestra exclusiva colección de joyería certificada, extraída y elaborada en Colombia.</p>
+      <a href="#products" class="bg-white text-emerald-900 font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition">Ver Colección</a>
     </div>
-  </aside>
+  </section>
 
-  <a href="https://wa.me/573001112233" class="whatsapp" target="_blank">💬 WhatsApp</a>
+  <!-- Tabs Navigation -->
+  <div class="bg-white sticky top-0 z-30 shadow-sm">
+    <div class="container mx-auto px-4">
+      <div class="flex overflow-x-auto hide-scrollbar">
+        <button class="tab-button active px-6 py-4 whitespace-nowrap" data-tab="all">Todos</button>
+        <button class="tab-button px-6 py-4 whitespace-nowrap" data-tab="rings">Anillos</button>
+        <button class="tab-button px-6 py-4 whitespace-nowrap" data-tab="necklaces">Collares</button>
+        <button class="tab-button px-6 py-4 whitespace-nowrap" data-tab="earrings">Aretes</button>
+        <button class="tab-button px-6 py-4 whitespace-nowrap" data-tab="bracelets">Pulseras</button>
+      </div>
+    </div>
+  </div>
 
-  <script src="script.js"></script>
+  <!-- Contenedor de Productos -->
+  <section id="products" class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center text-emerald-900 mb-8">Nuestros Productos</h2>
+      
+      <!-- Tab Content - All Products -->
+      <div id="all" class="tab-content active">
+        <div id="products-grid-all" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+      </div>
+      
+      <!-- Tab Content - Rings -->
+      <div id="rings" class="tab-content">
+        <div id="products-grid-rings" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+      </div>
+      
+      <!-- Tab Content - Necklaces -->
+      <div id="necklaces" class="tab-content">
+        <div id="products-grid-necklaces" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+      </div>
+      
+      <!-- Tab Content - Earrings -->
+      <div id="earrings" class="tab-content">
+        <div id="products-grid-earrings" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+      </div>
+      
+      <!-- Tab Content - Bracelets -->
+      <div id="bracelets" class="tab-content">
+        <div id="products-grid-bracelets" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WhatsApp Flotante -->
+  <a href="https://wa.me/573001234567" target="_blank"
+     class="fixed bottom-6 right-6 bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center text-3xl shadow-lg hover:scale-110 transition-transform z-40">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Botón Carrito -->
+  <div id="cart-button"
+       class="fixed bottom-6 left-6 bg-emerald-900 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg z-40 cursor-pointer hover:bg-emerald-800 transition">
+    <i class="fas fa-shopping-cart text-2xl"></i>
+    <span id="cart-count"
+          class="absolute -top-2 -right-2 bg-yellow-500 text-emerald-900 text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center">0</span>
+  </div>
+
+  <!-- Sidebar Carrito -->
+  <div id="cart-sidebar"
+       class="fixed top-0 right-0 w-full md:w-96 h-full bg-white shadow-lg z-50 transform translate-x-full transition-transform duration-300 overflow-y-auto">
+    <div class="p-6 flex flex-col h-full">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-xl font-bold text-emerald-900">Tu Carrito</h3>
+        <button id="close-cart" class="text-gray-500 hover:text-emerald-900 text-2xl">
+          &times;
+        </button>
+      </div>
+      <div id="cart-items" class="flex-1 overflow-y-auto">
+        <div id="empty-cart-message" class="text-center py-8">
+          <i class="fas fa-shopping-cart text-4xl text-gray-300 mb-4"></i>
+          <p class="text-gray-500">Tu carrito está vacío</p>
+        </div>
+      </div>
+      <div id="cart-summary" class="border-t pt-4 hidden">
+        <div class="flex justify-between mb-2"><span>Subtotal:</span><span id="cart-subtotal"></span></div>
+        <div class="flex justify-between mb-2"><span>Envío:</span><span id="cart-shipping"></span></div>
+        <div class="flex justify-between font-bold text-lg text-emerald-900"><span>Total:</span><span id="cart-total"></span></div>
+        <div class="mt-4 space-y-2">
+          <a href="https://checkout.wompi.co/l/TU_ENLACE" target="_blank"
+             class="block bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg text-center transition">
+            <i class="fas fa-credit-card mr-2"></i> Wompi (COL)
+          </a>
+          <a href="https://buy.stripe.com/TU_ENLACE" target="_blank"
+             class="block bg-purple-600 hover:bg-purple-700 text-white py-3 px-4 rounded-lg text-center transition">
+            <i class="fab fa-stripe mr-2"></i> Stripe (INT)
+          </a>
+          <form action="https://www.paypal.com/ncp/payment/TU_CODIGO" method="post" target="_blank">
+            <button type="submit"
+                    class="w-full bg-yellow-500 hover:bg-yellow-600 text-white py-3 px-4 rounded-lg text-center transition">
+              <i class="fab fa-paypal mr-2"></i> PayPal
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="cart-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+
+  <!-- Footer -->
+  <footer class="bg-emerald-900 text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4">Esmeraldas Colombianas</h3>
+          <p class="mb-4">Joyas certificadas de la más alta calidad, extraídas y elaboradas en Colombia.</p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-2xl hover:text-emerald-200 transition"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="text-2xl hover:text-emerald-200 transition"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-2xl hover:text-emerald-200 transition"><i class="fab fa-tiktok"></i></a>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-4">Enlaces</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-emerald-200 transition">Inicio</a></li>
+            <li><a href="#" class="hover:text-emerald-200 transition">Productos</a></li>
+            <li><a href="#" class="hover:text-emerald-200 transition">Certificados</a></li>
+            <li><a href="#" class="hover:text-emerald-200 transition">Nosotros</a></li>
+            <li><a href="#" class="hover:text-emerald-200 transition">Contacto</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-4">Contacto</h3>
+          <ul class="space-y-2">
+            <li class="flex items-center"><i class="fas fa-map-marker-alt mr-2"></i> Bogotá, Colombia</li>
+            <li class="flex items-center"><i class="fas fa-phone-alt mr-2"></i> +57 300 123 4567</li>
+            <li class="flex items-center"><i class="fas fa-envelope mr-2"></i> info@esmeraldascolombianas.com</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-4">Newsletter</h3>
+          <p class="mb-4">Suscríbete para recibir nuestras ofertas especiales.</p>
+          <form class="flex">
+            <input type="email" placeholder="Tu email" class="px-4 py-2 rounded-l text-gray-900 w-full">
+            <button type="submit" class="bg-yellow-500 text-emerald-900 px-4 py-2 rounded-r font-bold">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="border-t border-emerald-800 mt-8 pt-8 text-center">
+        <p>&copy; 2023 Esmeraldas Colombianas. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTFNMh-dYZq0tHZHBGwyxZG8_gEj8rn4S6n2zrZGwZR_DomeelB14P_sxtV_i09vKu_CkLA05Hn1lJ-/pub?gid=0&single=true&output=csv";
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let products = [];
+
+    function saveCart() {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function updateCartCount() {
+      const count = cart.reduce((a, b) => a + b.quantity, 0);
+      document.getElementById('cart-count').textContent = count;
+    }
+
+    function updateCartDisplay() {
+      const itemsContainer = document.getElementById('cart-items');
+      const summary = document.getElementById('cart-summary');
+      const emptyMsg = document.getElementById('empty-cart-message');
+      itemsContainer.innerHTML = '';
+
+      if (!cart.length) {
+        emptyMsg.classList.remove('hidden');
+        summary.classList.add('hidden');
+      } else {
+        emptyMsg.classList.add('hidden');
+        summary.classList.remove('hidden');
+        let subtotal = 0;
+
+        cart.forEach((item, idx) => {
+          const itemTotal = item.price * item.quantity;
+          subtotal += itemTotal;
+
+          const div = document.createElement('div');
+          div.className = "flex items-center mb-4";
+          div.innerHTML = `
+            <img src="${item.images[0]}" class="w-16 h-16 object-cover rounded mr-3" />
+            <div class="flex-1">
+              <p class="font-medium">${item.title}</p>
+              <p class="text-sm">${item.code}</p>
+              <p class="font-bold text-yellow-500">$${item.price.toLocaleString()}</p>
+              <div class="flex items-center">
+                <button class="decrease text-gray-600 px-2" data-idx="${idx}">-</button>
+                <span class="px-2">${item.quantity}</span>
+                <button class="increase text-gray-600 px-2" data-idx="${idx}">+</button>
+              </div>
+            </div>
+            <button class="text-red-500 remove" data-idx="${idx}">&times;</button>
+          `;
+          itemsContainer.appendChild(div);
+        });
+
+        const shipping = subtotal > 500000 ? 0 : 15000;
+        const total = subtotal + shipping;
+
+        document.getElementById('cart-subtotal').textContent = `$${subtotal.toLocaleString()}`;
+        document.getElementById('cart-shipping').textContent = `$${shipping.toLocaleString()}`;
+        document.getElementById('cart-total').textContent = `$${total.toLocaleString()}`;
+
+        itemsContainer.querySelectorAll('.decrease').forEach(btn =>
+          btn.onclick = () => {
+            const i = +btn.dataset.idx;
+            if (cart[i].quantity > 1) cart[i].quantity--; else cart.splice(i, 1);
+            saveCart(); updateCartDisplay(); updateCartCount();
+          });
+
+        itemsContainer.querySelectorAll('.increase').forEach(btn =>
+          btn.onclick = () => {
+            cart[+btn.dataset.idx].quantity++;
+            saveCart(); updateCartDisplay(); updateCartCount();
+          });
+
+        itemsContainer.querySelectorAll('.remove').forEach(btn =>
+          btn.onclick = () => {
+            cart.splice(+btn.dataset.idx, 1);
+            saveCart(); updateCartDisplay(); updateCartCount();
+          });
+      }
+    }
+
+    function addToCart(prod) {
+      const idx = cart.findIndex(i => i.code === prod.code);
+      if (idx > -1) cart[idx].quantity++; else cart.push({...prod, quantity: 1});
+      saveCart(); 
+      updateCartCount(); 
+      updateCartDisplay();
+      
+      // Mostrar notificación
+      const notification = document.createElement('div');
+      notification.className = 'fixed bottom-20 left-6 bg-emerald-600 text-white px-4 py-2 rounded shadow-lg z-50 animate-bounce';
+      notification.innerHTML = `<i class="fas fa-check-circle mr-2"></i> ${prod.title} agregado al carrito`;
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.classList.add('opacity-0', 'transition-opacity', 'duration-300');
+        setTimeout(() => notification.remove(), 300);
+      }, 2000);
+    }
+
+    function createProductCard(p) {
+      const card = document.createElement('div');
+      card.className = "bg-white p-4 rounded-lg shadow hover:shadow-lg transition product-card";
+      card.innerHTML = `
+        <div class="relative">
+          <img src="${p.images[0] || 'https://via.placeholder.com/300'}" class="w-full h-48 object-cover mb-3 rounded" />
+          ${p.oferta ? `<span class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">${p.oferta}% OFF</span>` : ''}
+        </div>
+        <h3 class="text-lg font-semibold text-emerald-900">${p.titulo || ''}</h3>
+        <p class="text-sm text-gray-600 mb-2">${p.categoria || ''}</p>
+        <p class="text-lg font-bold ${p.oferta ? 'text-red-500' : 'text-yellow-500'}">
+          ${p.oferta ? `<span class="line-through mr-2 text-gray-400">$${p.price.toLocaleString()}</span><span>$${(p.price * (1 - Number(p.oferta)/100)).toLocaleString()}</span>` : `$${p.price.toLocaleString()}`}
+        </p>
+        <button class="mt-3 w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded transition" onclick='addToCart(${JSON.stringify(p)})'>
+          <i class="fas fa-cart-plus mr-2"></i> Agregar
+        </button>
+      `;
+      return card;
+    }
+
+    function filterProductsByCategory(category) {
+      if (category === 'all') return products;
+      return products.filter(p => p.categoria && p.categoria.toLowerCase().includes(category));
+    }
+
+    function displayProductsByCategory(category) {
+      const filteredProducts = filterProductsByCategory(category);
+      const container = document.getElementById(`products-grid-${category}`);
+      container.innerHTML = '';
+      
+      if (filteredProducts.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full text-center py-12">
+            <i class="fas fa-gem text-4xl text-gray-300 mb-4"></i>
+            <p class="text-gray-500">Pronto tendremos más productos en esta categoría</p>
+          </div>
+        `;
+      } else {
+        filteredProducts.forEach(p => {
+          container.appendChild(createProductCard(p));
+        });
+      }
+    }
+
+    async function loadProducts() {
+      try {
+        const res = await fetch(SHEET_CSV_URL);
+        const text = await res.text();
+        const rows = text.split('\n').filter(r => r.trim()).map(line => line.split(','));
+        const headers = rows.shift();
+        
+        products = rows.map(r => {
+          const obj = {};
+          headers.forEach((h, i) => obj[h.trim()] = r[i]?.trim());
+          obj.images = obj.imagenes ? obj.imagenes.split('|') : ['https://via.placeholder.com/300'];
+          obj.price = Number(obj.precio || 0);
+          obj.code = obj.codigo || '';
+          obj.title = obj.titulo || '';
+          obj.categoria = obj.categoria || '';
+          return obj;
+        });
+
+        // Mostrar todos los productos inicialmente
+        const allGrid = document.getElementById('products-grid-all');
+        products.forEach(p => {
+          allGrid.appendChild(createProductCard(p));
+        });
+
+        // Inicializar las otras categorías
+        ['rings', 'necklaces', 'earrings', 'bracelets'].forEach(cat => {
+          displayProductsByCategory(cat);
+        });
+
+      } catch (error) {
+        console.error('Error loading products:', error);
+        document.getElementById('products-grid-all').innerHTML = `
+          <div class="col-span-full text-center py-12">
+            <i class="fas fa-exclamation-triangle text-4xl text-red-500 mb-4"></i>
+            <p class="text-gray-700">Error cargando los productos. Por favor intenta más tarde.</p>
+          </div>
+        `;
+      }
+    }
+
+    // Controles carrito
+    document.getElementById('cart-button').onclick = () => {
+      document.getElementById('cart-sidebar').classList.remove('translate-x-full');
+      document.getElementById('cart-overlay').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    };
+    
+    document.getElementById('close-cart').onclick = () => {
+      document.getElementById('cart-sidebar').classList.add('translate-x-full');
+      document.getElementById('cart-overlay').classList.add('hidden');
+      document.body.style.overflow = '';
+    };
+    
+    document.getElementById('cart-overlay').onclick = document.getElementById('close-cart').onclick;
+
+    // Control de pestañas
+    document.querySelectorAll('.tab-button').forEach(button => {
+      button.addEventListener('click', () => {
+        // Remover clase active de todos los botones
+        document.querySelectorAll('.tab-button').forEach(btn => {
+          btn.classList.remove('active');
+        });
+        
+        // Agregar clase active al botón clickeado
+        button.classList.add('active');
+        
+        // Ocultar todos los contenidos
+        document.querySelectorAll('.tab-content').forEach(content => {
+          content.classList.remove('active');
+        });
+        
+        // Mostrar el contenido correspondiente
+        const tabId = button.getAttribute('data-tab');
+        document.getElementById(tabId).classList.add('active');
+      });
+    });
+
+    // Inicialización
+    document.addEventListener('DOMContentLoaded', () => {
+      loadProducts();
+      updateCartCount();
+      updateCartDisplay();
+    });
+  </script>
 </body>
 </html>
