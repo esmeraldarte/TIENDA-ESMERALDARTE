@@ -90,46 +90,6 @@
         </div>
       </section>
 
-      <!-- Featured Categories -->
-      <section class="py-12 bg-white">
-        <div class="container mx-auto px-4">
-          <h2 class="text-3xl font-bold text-center text-emerald-900 mb-8">Categorías Destacadas</h2>
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <a href="#" class="category-link" data-tab="rings">
-              <div class="bg-gray-100 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition">
-                <img src="https://images.unsplash.com/photo-1603974372035-9d5a264f5a4a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Anillos" class="w-full h-48 object-cover">
-                <div class="p-4 text-center">
-                  <h3 class="font-bold text-emerald-900">Anillos</h3>
-                </div>
-              </div>
-            </a>
-            <a href="#" class="category-link" data-tab="necklaces">
-              <div class="bg-gray-100 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition">
-                <img src="https://images.unsplash.com/photo-1611591437281-4608be122683?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Collares" class="w-full h-48 object-cover">
-                <div class="p-4 text-center">
-                  <h3 class="font-bold text-emerald-900">Collares</h3>
-                </div>
-              </div>
-            </a>
-            <a href="#" class="category-link" data-tab="stones">
-              <div class="bg-gray-100 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition">
-                <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Piedras" class="w-full h-48 object-cover">
-                <div class="p-4 text-center">
-                  <h3 class="font-bold text-emerald-900">Piedras</h3>
-                </div>
-              </div>
-            </a>
-            <a href="#" class="category-link" data-tab="charms">
-              <div class="bg-gray-100 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition">
-                <img src="https://images.unsplash.com/photo-1617113730072-9b9174986ae0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Dijes" class="w-full h-48 object-cover">
-                <div class="p-4 text-center">
-                  <h3 class="font-bold text-emerald-900">Dijes</h3>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-      </section>
 
       <!-- About Section -->
       <section class="py-12 bg-gray-50">
@@ -758,22 +718,43 @@
 
     function filterProductsByCategory(category) {
       if (category === 'all') return products;
-      return products.filter(p => p.categoria && p.categoria.toLowerCase().includes(category));
+      
+      // Mapeo directo de categorías (debe coincidir exactamente con lo que viene de la hoja)
+      const categoryMap = {
+        'rings': 'anillos',
+        'necklaces': 'collares', 
+        'earrings': 'aretes',
+        'bracelets': 'pulseras',
+        'stones': 'piedras',
+        'charms': 'dijes'
+      };
+      
+      const categoryValue = categoryMap[category] || category;
+      return products.filter(p => {
+        if (!p.categoria) return false;
+        return p.categoria.toLowerCase() === categoryValue.toLowerCase();
+      });
     }
 
     function displayProductsByCategory(category) {
       const filteredProducts = filterProductsByCategory(category);
       const container = document.getElementById(`products-grid-${category}`);
+      
+      if (!container) return; // Si no existe el contenedor, salir
+      
       container.innerHTML = '';
 
       if (filteredProducts.length === 0) {
         container.innerHTML = `
           <div class="col-span-full text-center py-12">
             <i class="fas fa-gem text-4xl text-gray-300 mb-4"></i>
-            <p class="text-gray-500">Pronto tendremos más productos en esta categoría</p>
+            <p class="text-gray-500">No encontramos productos en esta categoría</p>
           </div>
         `;
       } else {
+        // Ordenar productos alfabéticamente
+        filteredProducts.sort((a, b) => a.title.localeCompare(b.title));
+        
         filteredProducts.forEach(p => {
           container.appendChild(createProductCard(p));
         });
@@ -790,11 +771,11 @@
         products = rows.map(r => {
           const obj = {};
           headers.forEach((h, i) => obj[h.trim()] = r[i]?.trim());
-          obj.images = obj.imagenes ? obj.imagenes.split('|') : ['https://via.placeholder.com/300'];
+          obj.images = obj.imagenes ? obj.imagenes.split(',') : ['https://via.placeholder.com/300'];
           obj.price = Number(obj.precio || 0);
           obj.code = obj.codigo || '';
           obj.title = obj.titulo || '';
-          obj.categoria = obj.categoria || '';
+          obj.categoria = obj.categoria ? obj.categoria.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") : '';
           return obj;
         });
 
@@ -804,8 +785,9 @@
           allGrid.appendChild(createProductCard(p));
         });
 
-        // Inicializar las otras categorías
-        ['rings', 'necklaces', 'earrings', 'bracelets', 'stones', 'charms'].forEach(cat => {
+        // Inicializar todas las categorías
+        const categories = ['all', 'rings', 'necklaces', 'earrings', 'bracelets', 'stones', 'charms'];
+        categories.forEach(cat => {
           displayProductsByCategory(cat);
         });
 
