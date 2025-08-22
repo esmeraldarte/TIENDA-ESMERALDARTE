@@ -42,6 +42,18 @@
     .mobile-menu.open {
       max-height: 500px;
     }
+    .loading-spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body class="bg-white font-sans">
@@ -89,9 +101,7 @@
           <a href="#products" class="bg-white text-emerald-900 font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition">Ver Colección</a>
         </div>
       </section>
-
-
-      <!-- About Section -->
+        <!-- About Section -->
       <section class="py-12 bg-gray-50">
         <div class="container mx-auto px-4">
           <div class="flex flex-col md:flex-row items-center">
@@ -119,6 +129,9 @@
             <button class="tab-button px-6 py-4 whitespace-nowrap" data-tab="bracelets">Pulseras</button>
             <button class="tab-button px-6 py-4 whitespace-nowrap" data-tab="stones">Piedras</button>
             <button class="tab-button px-6 py-4 whitespace-nowrap" data-tab="charms">Dijes</button>
+            <button id="refresh-products" class="px-4 py-4 text-emerald-600 hover:text-emerald-800 transition">
+              <i class="fas fa-sync-alt"></i>
+            </button>
           </div>
         </div>
       </div>
@@ -127,6 +140,12 @@
       <section id="products" class="py-12 bg-gray-50">
         <div class="container mx-auto px-4">
           <h2 class="text-3xl font-bold text-center text-emerald-900 mb-8">Nuestros Productos</h2>
+          
+          <!-- Loading State -->
+          <div id="loading-products" class="text-center py-8 hidden">
+            <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-emerald-600 mb-4"></div>
+            <p class="text-gray-600">Actualizando productos...</p>
+          </div>
 
           <!-- Tab Content - All Products -->
           <div id="all" class="tab-content active">
@@ -170,7 +189,7 @@
     <section id="collections" class="page-section py-12">
       <div class="container mx-auto px-4">
         <h2 class="text-3xl font-bold text-center text-emerald-900 mb-8">Nuestras Colecciones</h2>
-        
+                
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <!-- Collection 1 -->
           <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition">
@@ -181,7 +200,7 @@
               <a href="#" class="category-link inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded transition" data-tab="rings">Ver colección</a>
             </div>
           </div>
-          
+                    
           <!-- Collection 2 -->
           <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition">
             <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Piedras en Bruto" class="w-full h-64 object-cover">
@@ -191,7 +210,7 @@
               <a href="#" class="category-link inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded transition" data-tab="stones">Ver colección</a>
             </div>
           </div>
-          
+                    
           <!-- Collection 3 -->
           <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition">
             <img src="https://images.unsplash.com/photo-1611591437281-4608be122683?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Diseños Modernos" class="w-full h-64 object-cover">
@@ -209,7 +228,7 @@
     <section id="certificates" class="page-section py-12 bg-gray-50">
       <div class="container mx-auto px-4">
         <h2 class="text-3xl font-bold text-center text-emerald-900 mb-8">Certificados de Autenticidad</h2>
-        
+                
         <div class="flex flex-col md:flex-row items-center mb-12">
           <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
             <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Certificados" class="rounded-lg shadow-lg w-full">
@@ -227,7 +246,7 @@
             <a href="#" class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-6 rounded transition">Ver ejemplo de certificado</a>
           </div>
         </div>
-        
+                
         <div class="bg-white p-8 rounded-lg shadow-md">
           <h3 class="text-2xl font-bold text-emerald-800 mb-4 text-center">Cómo Verificar tu Certificado</h3>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -261,7 +280,7 @@
     <section id="about" class="page-section py-12 bg-white">
       <div class="container mx-auto px-4">
         <h2 class="text-3xl font-bold text-center text-emerald-900 mb-8">Sobre Nosotros</h2>
-        
+                
         <div class="flex flex-col md:flex-row items-center mb-12">
           <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
             <img src="https://images.unsplash.com/photo-1519817650390-64a93db51149?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Nuestra Historia" class="rounded-lg shadow-lg w-full">
@@ -282,7 +301,7 @@
             </div>
           </div>
         </div>
-        
+                
         <div class="bg-gray-50 p-8 rounded-lg shadow-md mb-12">
           <h3 class="text-2xl font-bold text-emerald-800 mb-6 text-center">Nuestros Valores</h3>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -309,7 +328,7 @@
             </div>
           </div>
         </div>
-        
+                
         <div>
           <h3 class="text-2xl font-bold text-emerald-800 mb-6 text-center">Nuestro Equipo</h3>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -346,12 +365,12 @@
     <section id="contact" class="page-section py-12 bg-gray-50">
       <div class="container mx-auto px-4">
         <h2 class="text-3xl font-bold text-center text-emerald-900 mb-8">Contáctanos</h2>
-        
+                
         <div class="flex flex-col lg:flex-row gap-8">
           <div class="lg:w-1/2">
             <div class="bg-white p-8 rounded-lg shadow-md">
               <h3 class="text-2xl font-bold text-emerald-800 mb-6">Información de Contacto</h3>
-              
+                            
               <div class="space-y-4">
                 <div class="flex items-start">
                   <div class="text-emerald-600 mr-4 mt-1">
@@ -362,7 +381,7 @@
                     <p class="text-gray-600">Carrera 7 # 72-41, Bogotá, Colombia</p>
                   </div>
                 </div>
-                
+                                
                 <div class="flex items-start">
                   <div class="text-emerald-600 mr-4 mt-1">
                     <i class="fas fa-phone-alt text-xl"></i>
@@ -373,7 +392,7 @@
                     <p class="text-gray-600">+57 300 123 4567 (Móvil/WhatsApp)</p>
                   </div>
                 </div>
-                
+                                
                 <div class="flex items-start">
                   <div class="text-emerald-600 mr-4 mt-1">
                     <i class="fas fa-envelope text-xl"></i>
@@ -384,7 +403,7 @@
                     <p class="text-gray-600">ventas@esmeraldascolombianas.com</p>
                   </div>
                 </div>
-                
+                                
                 <div class="flex items-start">
                   <div class="text-emerald-600 mr-4 mt-1">
                     <i class="fas fa-clock text-xl"></i>
@@ -396,7 +415,7 @@
                   </div>
                 </div>
               </div>
-              
+                            
               <div class="mt-8">
                 <h4 class="font-bold text-gray-800 mb-4">Síguenos</h4>
                 <div class="flex space-x-4">
@@ -416,27 +435,27 @@
               </div>
             </div>
           </div>
-          
+                    
           <div class="lg:w-1/2">
             <div class="bg-white p-8 rounded-lg shadow-md">
               <h3 class="text-2xl font-bold text-emerald-800 mb-6">Envíanos un Mensaje</h3>
-              
+                            
               <form id="contact-form" class="space-y-4">
                 <div>
                   <label for="name" class="block text-gray-700 font-medium mb-2">Nombre Completo</label>
                   <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-emerald-500">
                 </div>
-                
+                                
                 <div>
                   <label for="email" class="block text-gray-700 font-medium mb-2">Correo Electrónico</label>
                   <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-emerald-500">
                 </div>
-                
+                                
                 <div>
                   <label for="phone" class="block text-gray-700 font-medium mb-2">Teléfono</label>
                   <input type="tel" id="phone" name="phone" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-emerald-500">
                 </div>
-                
+                                
                 <div>
                   <label for="subject" class="block text-gray-700 font-medium mb-2">Asunto</label>
                   <select id="subject" name="subject" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-emerald-500">
@@ -447,12 +466,12 @@
                     <option value="Otro">Otro</option>
                   </select>
                 </div>
-                
+                                
                 <div>
                   <label for="message" class="block text-gray-700 font-medium mb-2">Mensaje</label>
                   <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
                 </div>
-                
+                                
                 <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded transition">
                   Enviar Mensaje
                 </button>
@@ -460,7 +479,7 @@
             </div>
           </div>
         </div>
-        
+                
         <div class="mt-12">
           <div class="bg-white p-6 rounded-lg shadow-md">
             <h3 class="text-2xl font-bold text-emerald-800 mb-6 text-center">Visítanos</h3>
@@ -578,6 +597,8 @@
 
   <script>
     const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTFNMh-dYZq0tHZHBGwyxZG8_gEj8rn4S6n2zrZGwZR_DomeelB14P_sxtV_i09vKu_CkLA05Hn1lJ-/pub?gid=0&single=true&output=csv";
+    const CACHE_KEY = 'esmeraldas_products_cache';
+    const CACHE_EXPIRATION = 30 * 60 * 1000; // 30 minutos en milisegundos
 
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     let products = [];
@@ -718,7 +739,7 @@
 
     function filterProductsByCategory(category) {
       if (category === 'all') return products;
-      
+            
       // Mapeo directo de categorías (debe coincidir exactamente con lo que viene de la hoja)
       const categoryMap = {
         'rings': 'anillos',
@@ -728,7 +749,7 @@
         'stones': 'piedras',
         'charms': 'dijes'
       };
-      
+            
       const categoryValue = categoryMap[category] || category;
       return products.filter(p => {
         if (!p.categoria) return false;
@@ -739,9 +760,9 @@
     function displayProductsByCategory(category) {
       const filteredProducts = filterProductsByCategory(category);
       const container = document.getElementById(`products-grid-${category}`);
-      
+            
       if (!container) return; // Si no existe el contenedor, salir
-      
+            
       container.innerHTML = '';
 
       if (filteredProducts.length === 0) {
@@ -754,16 +775,38 @@
       } else {
         // Ordenar productos alfabéticamente
         filteredProducts.sort((a, b) => a.title.localeCompare(b.title));
-        
+                
         filteredProducts.forEach(p => {
           container.appendChild(createProductCard(p));
         });
       }
     }
 
-    async function loadProducts() {
+    function clearAllProductGrids() {
+      const categories = ['all', 'rings', 'necklaces', 'earrings', 'bracelets', 'stones', 'charms'];
+      categories.forEach(cat => {
+        const container = document.getElementById(`products-grid-${cat}`);
+        if (container) container.innerHTML = '';
+      });
+    }
+
+    function updateAllProductGrids() {
+      const categories = ['all', 'rings', 'necklaces', 'earrings', 'bracelets', 'stones', 'charms'];
+      categories.forEach(cat => {
+        displayProductsByCategory(cat);
+      });
+    }
+
+    async function loadProductsFromSheet() {
       try {
-        const res = await fetch(SHEET_CSV_URL);
+        // Mostrar estado de carga
+        document.getElementById('loading-products').classList.remove('hidden');
+        
+        const timestamp = Date.now();
+        // Agregar timestamp a la URL para evitar caché del navegador
+        const url = `${SHEET_CSV_URL}&timestamp=${timestamp}`;
+        
+        const res = await fetch(url);
         const text = await res.text();
         const rows = text.split('\n').filter(r => r.trim()).map(line => line.split(','));
         const headers = rows.shift();
@@ -779,20 +822,44 @@
           return obj;
         });
 
-        // Mostrar todos los productos inicialmente
-        const allGrid = document.getElementById('products-grid-all');
-        products.forEach(p => {
-          allGrid.appendChild(createProductCard(p));
-        });
+        // Guardar en caché
+        const cacheData = {
+          products: products,
+          timestamp: timestamp
+        };
+        localStorage.setItem(CACHE_KEY, JSON.stringify(cacheData));
 
-        // Inicializar todas las categorías
-        const categories = ['all', 'rings', 'necklaces', 'earrings', 'bracelets', 'stones', 'charms'];
-        categories.forEach(cat => {
-          displayProductsByCategory(cat);
-        });
+        // Actualizar todas las rejillas de productos
+        updateAllProductGrids();
+
+        // Ocultar estado de carga
+        document.getElementById('loading-products').classList.add('hidden');
+
+        // Mostrar notificación de éxito
+        showNotification('Productos actualizados correctamente', 'success');
 
       } catch (error) {
         console.error('Error loading products:', error);
+        
+        // Ocultar estado de carga
+        document.getElementById('loading-products').classList.add('hidden');
+        
+        // Mostrar notificación de error
+        showNotification('Error al cargar los productos. Mostrando versión en caché.', 'error');
+        
+        // Intentar cargar desde caché si hay error
+        loadProductsFromCache();
+      }
+    }
+
+    function loadProductsFromCache() {
+      const cachedData = localStorage.getItem(CACHE_KEY);
+      if (cachedData) {
+        const { products: cachedProducts } = JSON.parse(cachedData);
+        products = cachedProducts;
+        updateAllProductGrids();
+      } else {
+        // Mostrar mensaje de error si no hay caché
         document.getElementById('products-grid-all').innerHTML = `
           <div class="col-span-full text-center py-12">
             <i class="fas fa-exclamation-triangle text-4xl text-red-500 mb-4"></i>
@@ -800,6 +867,49 @@
           </div>
         `;
       }
+    }
+
+    function checkCacheExpiration() {
+      const cachedData = localStorage.getItem(CACHE_KEY);
+      if (cachedData) {
+        const { timestamp } = JSON.parse(cachedData);
+        const now = Date.now();
+        if (now - timestamp > CACHE_EXPIRATION) {
+          // El caché ha expirado, cargar datos frescos
+          loadProductsFromSheet();
+        } else {
+          // Usar caché existente
+          loadProductsFromCache();
+        }
+      } else {
+        // No hay caché, cargar datos frescos
+        loadProductsFromSheet();
+      }
+    }
+
+    function showNotification(message, type = 'info') {
+      const notification = document.createElement('div');
+      notification.className = `fixed top-4 right-4 px-4 py-2 rounded shadow-lg z-50 animate-fade-in ${
+        type === 'success' ? 'bg-green-500 text-white' : 
+        type === 'error' ? 'bg-red-500 text-white' : 
+        'bg-blue-500 text-white'
+      }`;
+      notification.innerHTML = `
+        <div class="flex items-center">
+          <i class="fas ${
+            type === 'success' ? 'fa-check-circle' : 
+            type === 'error' ? 'fa-exclamation-circle' : 
+            'fa-info-circle'
+          } mr-2"></i>
+          <span>${message}</span>
+        </div>
+      `;
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.classList.add('opacity-0', 'transition-opacity', 'duration-300');
+        setTimeout(() => notification.remove(), 300);
+      }, 3000);
     }
 
     // Controles carrito
@@ -844,18 +954,18 @@
       link.addEventListener('click', (e) => {
         e.preventDefault();
         const page = link.getAttribute('data-page');
-        
+                
         // Ocultar todas las secciones
         document.querySelectorAll('.page-section').forEach(section => {
           section.classList.remove('active');
         });
-        
+                
         // Mostrar la sección seleccionada
         document.getElementById(page).classList.add('active');
-        
+                
         // Cerrar menú móvil si está abierto
         document.getElementById('mobile-menu').classList.remove('open');
-        
+                
         // Scroll al inicio
         window.scrollTo(0, 0);
       });
@@ -866,7 +976,7 @@
       link.addEventListener('click', (e) => {
         e.preventDefault();
         const tab = link.getAttribute('data-tab');
-        
+                
         // Activar la pestaña correspondiente
         document.querySelectorAll('.tab-button').forEach(btn => {
           btn.classList.remove('active');
@@ -874,7 +984,7 @@
             btn.classList.add('active');
           }
         });
-        
+                
         // Mostrar el contenido de la categoría
         document.querySelectorAll('.tab-content').forEach(content => {
           content.classList.remove('active');
@@ -882,10 +992,10 @@
             content.classList.add('active');
           }
         });
-        
+                
         // Ir a la sección de productos
         document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
-        
+                
         // Si estamos en una página diferente a Home, cambiar a Home
         if (!document.getElementById('home').classList.contains('active')) {
           document.querySelectorAll('.page-section').forEach(section => {
@@ -896,6 +1006,12 @@
       });
     });
 
+    // Botón de actualización de productos
+    document.getElementById('refresh-products').addEventListener('click', (e) => {
+      e.preventDefault();
+      loadProductsFromSheet();
+    });
+
     // Menú móvil
     document.getElementById('mobile-menu-button').addEventListener('click', () => {
       document.getElementById('mobile-menu').classList.toggle('open');
@@ -903,12 +1019,17 @@
 
     // Inicialización
     document.addEventListener('DOMContentLoaded', () => {
-      loadProducts();
+      // Cargar productos (primero verifica caché)
+      checkCacheExpiration();
+      
       updateCartCount();
       updateCartDisplay();
-      
+            
       // Mostrar la página de inicio por defecto
       document.getElementById('home').classList.add('active');
+
+      // Configurar actualización automática cada 5 minutos (opcional)
+      setInterval(checkCacheExpiration, 5 * 60 * 1000);
     });
   </script>
 </body>
