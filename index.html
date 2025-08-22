@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Esmeraldas Colombianas | Joyería Certificada</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     /* Estilos personalizados complementarios */
@@ -764,19 +765,23 @@
     function filterProductsByCategory(category) {
       if (category === 'all') return products;
       
-      // Mapeo de categorías (debe coincidir con lo que viene de la hoja)
+      // Mapeo de categorías con más flexibilidad
       const categoryMap = {
-        'rings': 'anillos',
-        'earrings': 'aretes',
-        'bracelets': 'pulseras',
-        'stones': 'piedras',
-        'charms': 'dijes'
+        'rings': ['anillos', 'anillo'],
+        'earrings': ['aretes', 'arete', 'pendientes'],
+        'bracelets': ['pulseras', 'pulsera'],
+        'stones': ['piedras', 'piedra', 'gema', 'gemas'],
+        'charms': ['dijes', 'dije']
       };
       
-      const categoryValue = categoryMap[category] || category;
+      const categoryValues = categoryMap[category] || [category];
       return products.filter(p => {
         if (!p.categoria) return false;
-        return p.categoria.toLowerCase() === categoryValue.toLowerCase();
+        
+        // Buscar coincidencia con cualquiera de los valores posibles
+        return categoryValues.some(val => 
+          p.categoria.toLowerCase().includes(val.toLowerCase())
+        );
       });
     }
 
@@ -831,19 +836,36 @@
         
         const res = await fetch(url);
         const text = await res.text();
-        const rows = text.split('\n').filter(r => r.trim()).map(line => line.split(','));
+        // Mejorar el parseo del CSV para manejar comas dentro de campos
+        const rows = Papa.parse(text, {skipEmptyLines: true}).data;
         const headers = rows.shift();
 
         products = rows.map(r => {
           const obj = {};
-          headers.forEach((h, i) => obj[h.trim()] = r[i]?.trim());
+          headers.forEach((h, i) => {
+            // Limpiar y normalizar cada valor
+            const value = r[i] ? r[i].toString().trim() : '';
+            obj[h.trim()] = value;
+          });
           
           // Procesar campos específicos
-          obj.images = obj.imagenes ? obj.imagenes.split(',').map(img => img.trim()) : ['https://via.placeholder.com/300'];
-          obj.price = Number(obj.precio || 0);
+          obj.images = obj.imagenes ? 
+            obj.imagenes.split(',').map(img => img.trim()).filter(img => img.startsWith('http')) 
+            : ['https://via.placeholder.com/300'];
+            
+          obj.price = Number(obj.precio) || 0;
           obj.code = obj.codigo || '';
           obj.title = obj.titulo || '';
-          obj.categoria = obj.categoria ? obj.categoria.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") : '';
+          
+          // Normalizar categorías
+          obj.categoria = obj.categoria ? 
+            obj.categoria.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") 
+            : '';
+            
+          // Mapear categorías alternativas a las principales
+          if (obj.categoria.includes('piedra') || obj.categoria.includes('gema')) {
+            obj.categoria = 'piedras';
+          }
           
           // Asegurar que los campos de especificaciones estén limpios
           obj.forma = obj.forma || '';
