@@ -27,11 +27,26 @@
     .product-card:hover {
       transform: translateY(-5px);
     }
+    .page-section {
+      display: none;
+    }
+    .page-section.active {
+      display: block;
+      animation: fadeIn 0.5s;
+    }
+    .mobile-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    .mobile-menu.open {
+      max-height: 500px;
+    }
   </style>
 </head>
 <body class="bg-white font-sans">
   <!-- Header -->
-  <header class="bg-emerald-900 text-white shadow-md">
+  <header class="bg-emerald-900 text-white shadow-md sticky top-0 z-50">
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
       <div class="flex items-center">
         <img src="https://via.placeholder.com/50" alt="Logo" class="h-10 mr-3">
@@ -39,72 +54,464 @@
       </div>
       <nav class="hidden md:block">
         <ul class="flex space-x-6">
-          <li><a href="#" class="hover:text-emerald-200 transition">Inicio</a></li>
-          <li><a href="#" class="hover:text-emerald-200 transition">Colecciones</a></li>
-          <li><a href="#" class="hover:text-emerald-200 transition">Certificados</a></li>
-          <li><a href="#" class="hover:text-emerald-200 transition">Nosotros</a></li>
-          <li><a href="#" class="hover:text-emerald-200 transition">Contacto</a></li>
+          <li><a href="#" class="nav-link hover:text-emerald-200 transition" data-page="home">Inicio</a></li>
+          <li><a href="#" class="nav-link hover:text-emerald-200 transition" data-page="collections">Colecciones</a></li>
+          <li><a href="#" class="nav-link hover:text-emerald-200 transition" data-page="certificates">Certificados</a></li>
+          <li><a href="#" class="nav-link hover:text-emerald-200 transition" data-page="about">Nosotros</a></li>
+          <li><a href="#" class="nav-link hover:text-emerald-200 transition" data-page="contact">Contacto</a></li>
         </ul>
       </nav>
-      <button class="md:hidden text-2xl">
+      <button id="mobile-menu-button" class="md:hidden text-2xl">
         <i class="fas fa-bars"></i>
       </button>
     </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu bg-emerald-800 md:hidden">
+      <ul class="px-4 py-2 space-y-2">
+        <li><a href="#" class="nav-link block py-2 hover:text-emerald-200 transition" data-page="home">Inicio</a></li>
+        <li><a href="#" class="nav-link block py-2 hover:text-emerald-200 transition" data-page="collections">Colecciones</a></li>
+        <li><a href="#" class="nav-link block py-2 hover:text-emerald-200 transition" data-page="certificates">Certificados</a></li>
+        <li><a href="#" class="nav-link block py-2 hover:text-emerald-200 transition" data-page="about">Nosotros</a></li>
+        <li><a href="#" class="nav-link block py-2 hover:text-emerald-200 transition" data-page="contact">Contacto</a></li>
+      </ul>
+    </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="bg-gradient-to-r from-emerald-800 to-emerald-600 text-white py-16">
-    <div class="container mx-auto px-4 text-center">
-      <h2 class="text-3xl md:text-5xl font-bold mb-4">Esmeraldas Colombianas de Alta Calidad</h2>
-      <p class="text-xl mb-8 max-w-2xl mx-auto">Descubre nuestra exclusiva colección de joyería certificada, extraída y elaborada en Colombia.</p>
-      <a href="#products" class="bg-white text-emerald-900 font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition">Ver Colección</a>
-    </div>
-  </section>
+  <!-- Page Sections -->
+  <main>
+    <!-- Home Section -->
+    <section id="home" class="page-section active">
+      <!-- Hero Section -->
+      <section class="bg-gradient-to-r from-emerald-800 to-emerald-600 text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+          <h2 class="text-3xl md:text-5xl font-bold mb-4">Esmeraldas Colombianas de Alta Calidad</h2>
+          <p class="text-xl mb-8 max-w-2xl mx-auto">Descubre nuestra exclusiva colección de joyería certificada, extraída y elaborada en Colombia.</p>
+          <a href="#products" class="bg-white text-emerald-900 font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition">Ver Colección</a>
+        </div>
+      </section>
 
-  <!-- Tabs Navigation -->
-  <div class="bg-white sticky top-0 z-30 shadow-sm">
-    <div class="container mx-auto px-4">
-      <div class="flex overflow-x-auto hide-scrollbar">
-        <button class="tab-button active px-6 py-4 whitespace-nowrap" data-tab="all">Todos</button>
-        <button class="tab-button px-6 py-4 whitespace-nowrap" data-tab="rings">Anillos</button>
-        <button class="tab-button px-6 py-4 whitespace-nowrap" data-tab="necklaces">Collares</button>
-        <button class="tab-button px-6 py-4 whitespace-nowrap" data-tab="earrings">Aretes</button>
-        <button class="tab-button px-6 py-4 whitespace-nowrap" data-tab="bracelets">Pulseras</button>
-      </div>
-    </div>
-  </div>
+      <!-- Featured Categories -->
+      <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+          <h2 class="text-3xl font-bold text-center text-emerald-900 mb-8">Categorías Destacadas</h2>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <a href="#" class="category-link" data-tab="rings">
+              <div class="bg-gray-100 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition">
+                <img src="https://images.unsplash.com/photo-1603974372035-9d5a264f5a4a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Anillos" class="w-full h-48 object-cover">
+                <div class="p-4 text-center">
+                  <h3 class="font-bold text-emerald-900">Anillos</h3>
+                </div>
+              </div>
+            </a>
+            <a href="#" class="category-link" data-tab="necklaces">
+              <div class="bg-gray-100 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition">
+                <img src="https://images.unsplash.com/photo-1611591437281-4608be122683?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Collares" class="w-full h-48 object-cover">
+                <div class="p-4 text-center">
+                  <h3 class="font-bold text-emerald-900">Collares</h3>
+                </div>
+              </div>
+            </a>
+            <a href="#" class="category-link" data-tab="stones">
+              <div class="bg-gray-100 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition">
+                <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Piedras" class="w-full h-48 object-cover">
+                <div class="p-4 text-center">
+                  <h3 class="font-bold text-emerald-900">Piedras</h3>
+                </div>
+              </div>
+            </a>
+            <a href="#" class="category-link" data-tab="charms">
+              <div class="bg-gray-100 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition">
+                <img src="https://images.unsplash.com/photo-1617113730072-9b9174986ae0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Dijes" class="w-full h-48 object-cover">
+                <div class="p-4 text-center">
+                  <h3 class="font-bold text-emerald-900">Dijes</h3>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
 
-  <!-- Contenedor de Productos -->
-  <section id="products" class="py-12 bg-gray-50">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center text-emerald-900 mb-8">Nuestros Productos</h2>
-      
-      <!-- Tab Content - All Products -->
-      <div id="all" class="tab-content active">
-        <div id="products-grid-all" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+      <!-- About Section -->
+      <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+          <div class="flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+              <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Esmeraldas Colombianas" class="rounded-lg shadow-lg w-full">
+            </div>
+            <div class="md:w-1/2">
+              <h2 class="text-3xl font-bold text-emerald-900 mb-4">Nuestra Historia</h2>
+              <p class="text-gray-700 mb-4">Desde 1985, Esmeraldas Colombianas ha sido sinónimo de calidad y excelencia en la joyería de esmeraldas. Nuestra pasión por estas piedras preciosas nos ha llevado a crear piezas únicas que capturan la esencia de Colombia.</p>
+              <p class="text-gray-700 mb-6">Cada pieza en nuestra colección es cuidadosamente seleccionada y certificada, garantizando autenticidad y calidad excepcional.</p>
+              <a href="#" class="nav-link inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-6 rounded transition" data-page="about">Conoce más</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tabs Navigation -->
+      <div class="bg-white sticky top-16 z-30 shadow-sm">
+        <div class="container mx-auto px-4">
+          <div class="flex overflow-x-auto hide-scrollbar">
+            <button class="tab-button active px-6 py-4 whitespace-nowrap" data-tab="all">Todos</button>
+            <button class="tab-button px-6 py-4 whitespace-nowrap" data-tab="rings">Anillos</button>
+            <button class="tab-button px-6 py-4 whitespace-nowrap" data-tab="necklaces">Collares</button>
+            <button class="tab-button px-6 py-4 whitespace-nowrap" data-tab="earrings">Aretes</button>
+            <button class="tab-button px-6 py-4 whitespace-nowrap" data-tab="bracelets">Pulseras</button>
+            <button class="tab-button px-6 py-4 whitespace-nowrap" data-tab="stones">Piedras</button>
+            <button class="tab-button px-6 py-4 whitespace-nowrap" data-tab="charms">Dijes</button>
+          </div>
+        </div>
       </div>
-      
-      <!-- Tab Content - Rings -->
-      <div id="rings" class="tab-content">
-        <div id="products-grid-rings" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+
+      <!-- Contenedor de Productos -->
+      <section id="products" class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+          <h2 class="text-3xl font-bold text-center text-emerald-900 mb-8">Nuestros Productos</h2>
+
+          <!-- Tab Content - All Products -->
+          <div id="all" class="tab-content active">
+            <div id="products-grid-all" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+          </div>
+
+          <!-- Tab Content - Rings -->
+          <div id="rings" class="tab-content">
+            <div id="products-grid-rings" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+          </div>
+
+          <!-- Tab Content - Necklaces -->
+          <div id="necklaces" class="tab-content">
+            <div id="products-grid-necklaces" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+          </div>
+
+          <!-- Tab Content - Earrings -->
+          <div id="earrings" class="tab-content">
+            <div id="products-grid-earrings" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+          </div>
+
+          <!-- Tab Content - Bracelets -->
+          <div id="bracelets" class="tab-content">
+            <div id="products-grid-bracelets" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+          </div>
+
+          <!-- Tab Content - Stones -->
+          <div id="stones" class="tab-content">
+            <div id="products-grid-stones" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+          </div>
+
+          <!-- Tab Content - Charms -->
+          <div id="charms" class="tab-content">
+            <div id="products-grid-charms" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- Collections Section -->
+    <section id="collections" class="page-section py-12">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center text-emerald-900 mb-8">Nuestras Colecciones</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Collection 1 -->
+          <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition">
+            <img src="https://images.unsplash.com/photo-1602173574767-37ac01994b2a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Colección Clásica" class="w-full h-64 object-cover">
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-emerald-900 mb-2">Colección Clásica</h3>
+              <p class="text-gray-600 mb-4">Piezas atemporales que combinan la belleza natural de las esmeraldas con diseños elegantes y sofisticados.</p>
+              <a href="#" class="category-link inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded transition" data-tab="rings">Ver colección</a>
+            </div>
+          </div>
+          
+          <!-- Collection 2 -->
+          <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition">
+            <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Piedras en Bruto" class="w-full h-64 object-cover">
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-emerald-900 mb-2">Piedras en Bruto</h3>
+              <p class="text-gray-600 mb-4">Esmeraldas colombianas en su estado más puro, perfectas para coleccionistas y conocedores.</p>
+              <a href="#" class="category-link inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded transition" data-tab="stones">Ver colección</a>
+            </div>
+          </div>
+          
+          <!-- Collection 3 -->
+          <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition">
+            <img src="https://images.unsplash.com/photo-1611591437281-4608be122683?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Diseños Modernos" class="w-full h-64 object-cover">
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-emerald-900 mb-2">Diseños Modernos</h3>
+              <p class="text-gray-600 mb-4">Innovadoras creaciones que fusionan tradición y vanguardia en cada pieza.</p>
+              <a href="#" class="category-link inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded transition" data-tab="charms">Ver colección</a>
+            </div>
+          </div>
+        </div>
       </div>
-      
-      <!-- Tab Content - Necklaces -->
-      <div id="necklaces" class="tab-content">
-        <div id="products-grid-necklaces" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="page-section py-12 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center text-emerald-900 mb-8">Certificados de Autenticidad</h2>
+        
+        <div class="flex flex-col md:flex-row items-center mb-12">
+          <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+            <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Certificados" class="rounded-lg shadow-lg w-full">
+          </div>
+          <div class="md:w-1/2">
+            <h3 class="text-2xl font-bold text-emerald-800 mb-4">Garantía de Calidad</h3>
+            <p class="text-gray-700 mb-4">Todas nuestras esmeraldas vienen con certificado de autenticidad emitido por laboratorios gemológicos reconocidos internacionalmente.</p>
+            <p class="text-gray-700 mb-4">Nuestros certificados incluyen:</p>
+            <ul class="list-disc pl-5 mb-6 text-gray-700 space-y-2">
+              <li>Origen colombiano verificable</li>
+              <li>Características de la piedra (quilates, medidas, color, claridad)</li>
+              <li>Análisis de tratamientos (si los hay)</li>
+              <li>Número de certificado único</li>
+            </ul>
+            <a href="#" class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-6 rounded transition">Ver ejemplo de certificado</a>
+          </div>
+        </div>
+        
+        <div class="bg-white p-8 rounded-lg shadow-md">
+          <h3 class="text-2xl font-bold text-emerald-800 mb-4 text-center">Cómo Verificar tu Certificado</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="text-center p-4">
+              <div class="bg-emerald-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                <i class="fas fa-search text-emerald-700 text-2xl"></i>
+              </div>
+              <h4 class="font-bold text-emerald-900 mb-2">1. Localiza el número</h4>
+              <p class="text-gray-600">Encuentra el número único de certificado en tu documento.</p>
+            </div>
+            <div class="text-center p-4">
+              <div class="bg-emerald-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                <i class="fas fa-laptop text-emerald-700 text-2xl"></i>
+              </div>
+              <h4 class="font-bold text-emerald-900 mb-2">2. Visita nuestro sitio</h4>
+              <p class="text-gray-600">Ingresa a nuestra sección de verificación de certificados.</p>
+            </div>
+            <div class="text-center p-4">
+              <div class="bg-emerald-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                <i class="fas fa-check-circle text-emerald-700 text-2xl"></i>
+              </div>
+              <h4 class="font-bold text-emerald-900 mb-2">3. Confirma autenticidad</h4>
+              <p class="text-gray-600">Ingresa el número y verifica los detalles de tu piedra.</p>
+            </div>
+          </div>
+        </div>
       </div>
-      
-      <!-- Tab Content - Earrings -->
-      <div id="earrings" class="tab-content">
-        <div id="products-grid-earrings" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="page-section py-12 bg-white">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center text-emerald-900 mb-8">Sobre Nosotros</h2>
+        
+        <div class="flex flex-col md:flex-row items-center mb-12">
+          <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+            <img src="https://images.unsplash.com/photo-1519817650390-64a93db51149?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Nuestra Historia" class="rounded-lg shadow-lg w-full">
+          </div>
+          <div class="md:w-1/2">
+            <h3 class="text-2xl font-bold text-emerald-800 mb-4">Nuestra Historia</h3>
+            <p class="text-gray-700 mb-4">Fundada en 1985 en Bogotá, Colombia, Esmeraldas Colombianas nació del sueño de compartir la belleza de nuestras esmeraldas con el mundo. Lo que comenzó como un pequeño taller familiar hoy es una empresa reconocida internacionalmente por su calidad y ética en el comercio de esmeraldas.</p>
+            <p class="text-gray-700 mb-6">Trabajamos directamente con mineros responsables en las regiones de Muzo, Chivor y Coscuez, asegurando prácticas justas y sostenibles en toda nuestra cadena de suministro.</p>
+            <div class="flex space-x-4">
+              <div class="text-center">
+                <p class="text-3xl font-bold text-emerald-700">35+</p>
+                <p class="text-gray-600">Años de experiencia</p>
+              </div>
+              <div class="text-center">
+                <p class="text-3xl font-bold text-emerald-700">10,000+</p>
+                <p class="text-gray-600">Clientes satisfechos</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-gray-50 p-8 rounded-lg shadow-md mb-12">
+          <h3 class="text-2xl font-bold text-emerald-800 mb-6 text-center">Nuestros Valores</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+              <div class="text-emerald-600 mb-3">
+                <i class="fas fa-gem text-3xl"></i>
+              </div>
+              <h4 class="font-bold text-emerald-900 mb-2">Calidad</h4>
+              <p class="text-gray-600">Seleccionamos solo las mejores esmeraldas, certificando su autenticidad y características.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+              <div class="text-emerald-600 mb-3">
+                <i class="fas fa-hand-holding-heart text-3xl"></i>
+              </div>
+              <h4 class="font-bold text-emerald-900 mb-2">Responsabilidad</h4>
+              <p class="text-gray-600">Promovemos prácticas mineras responsables y comercio justo en todas nuestras operaciones.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+              <div class="text-emerald-600 mb-3">
+                <i class="fas fa-award text-3xl"></i>
+              </div>
+              <h4 class="font-bold text-emerald-900 mb-2">Artesanía</h4>
+              <p class="text-gray-600">Nuestros joyeros combinan técnicas tradicionales con innovación en cada pieza.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-2xl font-bold text-emerald-800 mb-6 text-center">Nuestro Equipo</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-white p-6 rounded-lg shadow-md text-center">
+              <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="María Gómez" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
+              <h4 class="font-bold text-emerald-900">María Gómez</h4>
+              <p class="text-gray-600 mb-2">Directora de Diseño</p>
+              <p class="text-sm text-gray-500">20 años creando joyas excepcionales</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md text-center">
+              <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Carlos Rodríguez" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
+              <h4 class="font-bold text-emerald-900">Carlos Rodríguez</h4>
+              <p class="text-gray-600 mb-2">Gemólogo Certificado</p>
+              <p class="text-sm text-gray-500">Especialista en esmeraldas colombianas</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md text-center">
+              <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Laura Martínez" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
+              <h4 class="font-bold text-emerald-900">Laura Martínez</h4>
+              <p class="text-gray-600 mb-2">Relaciones con Mineros</p>
+              <p class="text-sm text-gray-500">Garantizando comercio justo</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md text-center">
+              <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Andrés López" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
+              <h4 class="font-bold text-emerald-900">Andrés López</h4>
+              <p class="text-gray-600 mb-2">Servicio al Cliente</p>
+              <p class="text-sm text-gray-500">Atendiendo tus consultas</p>
+            </div>
+          </div>
+        </div>
       </div>
-      
-      <!-- Tab Content - Bracelets -->
-      <div id="bracelets" class="tab-content">
-        <div id="products-grid-bracelets" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="page-section py-12 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center text-emerald-900 mb-8">Contáctanos</h2>
+        
+        <div class="flex flex-col lg:flex-row gap-8">
+          <div class="lg:w-1/2">
+            <div class="bg-white p-8 rounded-lg shadow-md">
+              <h3 class="text-2xl font-bold text-emerald-800 mb-6">Información de Contacto</h3>
+              
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div class="text-emerald-600 mr-4 mt-1">
+                    <i class="fas fa-map-marker-alt text-xl"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-gray-800">Oficina Principal</h4>
+                    <p class="text-gray-600">Carrera 7 # 72-41, Bogotá, Colombia</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-start">
+                  <div class="text-emerald-600 mr-4 mt-1">
+                    <i class="fas fa-phone-alt text-xl"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-gray-800">Teléfonos</h4>
+                    <p class="text-gray-600">+57 1 123 4567 (Fijo)</p>
+                    <p class="text-gray-600">+57 300 123 4567 (Móvil/WhatsApp)</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-start">
+                  <div class="text-emerald-600 mr-4 mt-1">
+                    <i class="fas fa-envelope text-xl"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-gray-800">Correo Electrónico</h4>
+                    <p class="text-gray-600">info@esmeraldascolombianas.com</p>
+                    <p class="text-gray-600">ventas@esmeraldascolombianas.com</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-start">
+                  <div class="text-emerald-600 mr-4 mt-1">
+                    <i class="fas fa-clock text-xl"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-gray-800">Horario de Atención</h4>
+                    <p class="text-gray-600">Lunes a Viernes: 9:00 am - 6:00 pm</p>
+                    <p class="text-gray-600">Sábados: 10:00 am - 2:00 pm</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="mt-8">
+                <h4 class="font-bold text-gray-800 mb-4">Síguenos</h4>
+                <div class="flex space-x-4">
+                  <a href="#" class="bg-emerald-100 text-emerald-700 w-10 h-10 rounded-full flex items-center justify-center hover:bg-emerald-200 transition">
+                    <i class="fab fa-facebook-f"></i>
+                  </a>
+                  <a href="#" class="bg-emerald-100 text-emerald-700 w-10 h-10 rounded-full flex items-center justify-center hover:bg-emerald-200 transition">
+                    <i class="fab fa-instagram"></i>
+                  </a>
+                  <a href="#" class="bg-emerald-100 text-emerald-700 w-10 h-10 rounded-full flex items-center justify-center hover:bg-emerald-200 transition">
+                    <i class="fab fa-tiktok"></i>
+                  </a>
+                  <a href="#" class="bg-emerald-100 text-emerald-700 w-10 h-10 rounded-full flex items-center justify-center hover:bg-emerald-200 transition">
+                    <i class="fab fa-youtube"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="lg:w-1/2">
+            <div class="bg-white p-8 rounded-lg shadow-md">
+              <h3 class="text-2xl font-bold text-emerald-800 mb-6">Envíanos un Mensaje</h3>
+              
+              <form id="contact-form" class="space-y-4">
+                <div>
+                  <label for="name" class="block text-gray-700 font-medium mb-2">Nombre Completo</label>
+                  <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                </div>
+                
+                <div>
+                  <label for="email" class="block text-gray-700 font-medium mb-2">Correo Electrónico</label>
+                  <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                </div>
+                
+                <div>
+                  <label for="phone" class="block text-gray-700 font-medium mb-2">Teléfono</label>
+                  <input type="tel" id="phone" name="phone" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                </div>
+                
+                <div>
+                  <label for="subject" class="block text-gray-700 font-medium mb-2">Asunto</label>
+                  <select id="subject" name="subject" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                    <option value="">Selecciona un asunto</option>
+                    <option value="Consulta">Consulta sobre productos</option>
+                    <option value="Certificado">Verificación de certificado</option>
+                    <option value="Compra">Proceso de compra</option>
+                    <option value="Otro">Otro</option>
+                  </select>
+                </div>
+                
+                <div>
+                  <label for="message" class="block text-gray-700 font-medium mb-2">Mensaje</label>
+                  <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
+                </div>
+                
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded transition">
+                  Enviar Mensaje
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        
+        <div class="mt-12">
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-2xl font-bold text-emerald-800 mb-6 text-center">Visítanos</h3>
+            <div class="aspect-w-16 aspect-h-9">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.785161881502!2d-74.05528692468066!3d4.651857942358362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9a3b0b0b0b0b%3A0x8e3f9a3b0b0b0b0b!2sCarrera%207%20%2372-41%2C%20Bogot%C3%A1!5e0!3m2!1ses!2sco!4v1620000000000!5m2!1ses!2sco" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" class="rounded-lg"></iframe>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <!-- WhatsApp Flotante -->
   <a href="https://wa.me/573001234567" target="_blank"
@@ -177,11 +584,11 @@
         <div>
           <h3 class="text-xl font-bold mb-4">Enlaces</h3>
           <ul class="space-y-2">
-            <li><a href="#" class="hover:text-emerald-200 transition">Inicio</a></li>
-            <li><a href="#" class="hover:text-emerald-200 transition">Productos</a></li>
-            <li><a href="#" class="hover:text-emerald-200 transition">Certificados</a></li>
-            <li><a href="#" class="hover:text-emerald-200 transition">Nosotros</a></li>
-            <li><a href="#" class="hover:text-emerald-200 transition">Contacto</a></li>
+            <li><a href="#" class="nav-link hover:text-emerald-200 transition" data-page="home">Inicio</a></li>
+            <li><a href="#" class="nav-link hover:text-emerald-200 transition" data-page="collections">Productos</a></li>
+            <li><a href="#" class="nav-link hover:text-emerald-200 transition" data-page="certificates">Certificados</a></li>
+            <li><a href="#" class="nav-link hover:text-emerald-200 transition" data-page="about">Nosotros</a></li>
+            <li><a href="#" class="nav-link hover:text-emerald-200 transition" data-page="contact">Contacto</a></li>
           </ul>
         </div>
         <div>
@@ -243,20 +650,22 @@
           subtotal += itemTotal;
 
           const div = document.createElement('div');
-          div.className = "flex items-center mb-4";
+          div.className = "flex items-center mb-4 border-b pb-4";
           div.innerHTML = `
             <img src="${item.images[0]}" class="w-16 h-16 object-cover rounded mr-3" />
             <div class="flex-1">
               <p class="font-medium">${item.title}</p>
-              <p class="text-sm">${item.code}</p>
+              <p class="text-sm text-gray-500">${item.code}</p>
               <p class="font-bold text-yellow-500">$${item.price.toLocaleString()}</p>
-              <div class="flex items-center">
-                <button class="decrease text-gray-600 px-2" data-idx="${idx}">-</button>
-                <span class="px-2">${item.quantity}</span>
-                <button class="increase text-gray-600 px-2" data-idx="${idx}">+</button>
+              <div class="flex items-center mt-1">
+                <button class="decrease bg-gray-200 hover:bg-gray-300 rounded-l px-2 py-1" data-idx="${idx}">-</button>
+                <span class="px-2 bg-gray-100 py-1">${item.quantity}</span>
+                <button class="increase bg-gray-200 hover:bg-gray-300 rounded-r px-2 py-1" data-idx="${idx}">+</button>
+                <button class="remove ml-4 text-red-500 text-sm" data-idx="${idx}">
+                  <i class="fas fa-trash-alt"></i> Eliminar
+                </button>
               </div>
             </div>
-            <button class="text-red-500 remove" data-idx="${idx}">&times;</button>
           `;
           itemsContainer.appendChild(div);
         });
@@ -268,40 +677,59 @@
         document.getElementById('cart-shipping').textContent = `$${shipping.toLocaleString()}`;
         document.getElementById('cart-total').textContent = `$${total.toLocaleString()}`;
 
-        itemsContainer.querySelectorAll('.decrease').forEach(btn =>
-          btn.onclick = () => {
+        // Add event listeners to the new buttons
+        itemsContainer.querySelectorAll('.decrease').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
             const i = +btn.dataset.idx;
-            if (cart[i].quantity > 1) cart[i].quantity--; else cart.splice(i, 1);
-            saveCart(); updateCartDisplay(); updateCartCount();
+            if (cart[i].quantity > 1) {
+              cart[i].quantity--;
+            } else {
+              cart.splice(i, 1);
+            }
+            saveCart();
+            updateCartDisplay();
+            updateCartCount();
           });
+        });
 
-        itemsContainer.querySelectorAll('.increase').forEach(btn =>
-          btn.onclick = () => {
+        itemsContainer.querySelectorAll('.increase').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
             cart[+btn.dataset.idx].quantity++;
-            saveCart(); updateCartDisplay(); updateCartCount();
+            saveCart();
+            updateCartDisplay();
+            updateCartCount();
           });
+        });
 
-        itemsContainer.querySelectorAll('.remove').forEach(btn =>
-          btn.onclick = () => {
+        itemsContainer.querySelectorAll('.remove').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
             cart.splice(+btn.dataset.idx, 1);
-            saveCart(); updateCartDisplay(); updateCartCount();
+            saveCart();
+            updateCartDisplay();
+            updateCartCount();
           });
+        });
       }
     }
 
     function addToCart(prod) {
       const idx = cart.findIndex(i => i.code === prod.code);
       if (idx > -1) cart[idx].quantity++; else cart.push({...prod, quantity: 1});
-      saveCart(); 
-      updateCartCount(); 
+      saveCart();
+
+      updateCartCount();
+
       updateCartDisplay();
-      
+
       // Mostrar notificación
       const notification = document.createElement('div');
       notification.className = 'fixed bottom-20 left-6 bg-emerald-600 text-white px-4 py-2 rounded shadow-lg z-50 animate-bounce';
       notification.innerHTML = `<i class="fas fa-check-circle mr-2"></i> ${prod.title} agregado al carrito`;
       document.body.appendChild(notification);
-      
+
       setTimeout(() => {
         notification.classList.add('opacity-0', 'transition-opacity', 'duration-300');
         setTimeout(() => notification.remove(), 300);
@@ -337,7 +765,7 @@
       const filteredProducts = filterProductsByCategory(category);
       const container = document.getElementById(`products-grid-${category}`);
       container.innerHTML = '';
-      
+
       if (filteredProducts.length === 0) {
         container.innerHTML = `
           <div class="col-span-full text-center py-12">
@@ -358,7 +786,7 @@
         const text = await res.text();
         const rows = text.split('\n').filter(r => r.trim()).map(line => line.split(','));
         const headers = rows.shift();
-        
+
         products = rows.map(r => {
           const obj = {};
           headers.forEach((h, i) => obj[h.trim()] = r[i]?.trim());
@@ -377,7 +805,7 @@
         });
 
         // Inicializar las otras categorías
-        ['rings', 'necklaces', 'earrings', 'bracelets'].forEach(cat => {
+        ['rings', 'necklaces', 'earrings', 'bracelets', 'stones', 'charms'].forEach(cat => {
           displayProductsByCategory(cat);
         });
 
@@ -398,13 +826,13 @@
       document.getElementById('cart-overlay').classList.remove('hidden');
       document.body.style.overflow = 'hidden';
     };
-    
+
     document.getElementById('close-cart').onclick = () => {
       document.getElementById('cart-sidebar').classList.add('translate-x-full');
       document.getElementById('cart-overlay').classList.add('hidden');
       document.body.style.overflow = '';
     };
-    
+
     document.getElementById('cart-overlay').onclick = document.getElementById('close-cart').onclick;
 
     // Control de pestañas
@@ -414,19 +842,81 @@
         document.querySelectorAll('.tab-button').forEach(btn => {
           btn.classList.remove('active');
         });
-        
+
         // Agregar clase active al botón clickeado
         button.classList.add('active');
-        
+
         // Ocultar todos los contenidos
         document.querySelectorAll('.tab-content').forEach(content => {
           content.classList.remove('active');
         });
-        
+
         // Mostrar el contenido correspondiente
         const tabId = button.getAttribute('data-tab');
         document.getElementById(tabId).classList.add('active');
       });
+    });
+
+    // Control de navegación entre páginas
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const page = link.getAttribute('data-page');
+        
+        // Ocultar todas las secciones
+        document.querySelectorAll('.page-section').forEach(section => {
+          section.classList.remove('active');
+        });
+        
+        // Mostrar la sección seleccionada
+        document.getElementById(page).classList.add('active');
+        
+        // Cerrar menú móvil si está abierto
+        document.getElementById('mobile-menu').classList.remove('open');
+        
+        // Scroll al inicio
+        window.scrollTo(0, 0);
+      });
+    });
+
+    // Control de categorías desde imágenes
+    document.querySelectorAll('.category-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const tab = link.getAttribute('data-tab');
+        
+        // Activar la pestaña correspondiente
+        document.querySelectorAll('.tab-button').forEach(btn => {
+          btn.classList.remove('active');
+          if (btn.getAttribute('data-tab') === tab) {
+            btn.classList.add('active');
+          }
+        });
+        
+        // Mostrar el contenido de la categoría
+        document.querySelectorAll('.tab-content').forEach(content => {
+          content.classList.remove('active');
+          if (content.id === tab) {
+            content.classList.add('active');
+          }
+        });
+        
+        // Ir a la sección de productos
+        document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+        
+        // Si estamos en una página diferente a Home, cambiar a Home
+        if (!document.getElementById('home').classList.contains('active')) {
+          document.querySelectorAll('.page-section').forEach(section => {
+            section.classList.remove('active');
+          });
+          document.getElementById('home').classList.add('active');
+        }
+      });
+    });
+
+    // Menú móvil
+    document.getElementById('mobile-menu-button').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('open');
     });
 
     // Inicialización
@@ -434,6 +924,9 @@
       loadProducts();
       updateCartCount();
       updateCartDisplay();
+      
+      // Mostrar la página de inicio por defecto
+      document.getElementById('home').classList.add('active');
     });
   </script>
 </body>
