@@ -3,135 +3,301 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda Esmeraldas</title>
+    <title>Tienda de Esmeraldas</title>
+
+    <!-- Fuente elegante -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background: #f3f7f6;
             margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: #f5f7f5;
+            color: #1a1a1a;
+        }
+
+        header {
+            background: white;
+            border-bottom: 1px solid #d9e5d9;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header img {
+            height: 60px;
+        }
+
+        nav a {
+            margin-left: 25px;
+            text-decoration: none;
+            color: #0f5132;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #198754;
+        }
+
+        .intro {
+            padding: 30px 40px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: #0f3d26;
+        }
+
+        /* Buscador */
+        .search-container {
+            text-align: center;
             padding: 20px;
         }
 
-        .titulo {
-            text-align: center;
-            color: #0f5132;
-            font-size: 30px;
-            margin-bottom: 25px;
+        #searchInput {
+            width: 60%;
+            padding: 12px 20px;
+            border: 2px solid #0f5132;
+            border-radius: 30px;
+            font-size: 1rem;
+            outline: none;
         }
 
-        .catalogo {
+        /* Grid de productos */
+        .products {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
+            padding: 40px;
+            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         }
 
-        .card {
+        .product-card {
             background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
             padding: 15px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             text-align: center;
+            border: 1px solid #d9e5d9;
         }
 
-        .card img {
+        .product-card img {
             width: 100%;
-            border-radius: 10px;
-        }
-
-        .precio {
-            margin-top: 8px;
-            font-weight: bold;
-            color: #0a3622;
-        }
-
-        .btn-whatsapp {
-            margin-top: 10px;
-            padding: 10px;
-            background: #25d366;
-            color: white;
-            border: none;
-            width: 100%;
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
-            font-weight: bold;
         }
 
-        .btn-whatsapp:hover {
-            background: #1ebe5c;
+        .product-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-top: 10px;
+            color: #0f3d26;
+        }
+
+        .product-code {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #d4edda;
+            color: #0f5132;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 1.2rem;
+            color: #0f3d26;
+            margin: 10px 0;
+        }
+
+        .btn {
+            background: #0f5132;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 30px;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.3s;
+            font-weight: 500;
+        }
+
+        .btn:hover {
+            background: #198754;
+        }
+
+        .section {
+            padding: 40px;
+            background: #eef5ee;
+            margin-top: 40px;
+        }
+
+        footer {
+            background: #0f3d26;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: #d4edda;
+            text-decoration: none;
+            margin: 0 10px;
         }
     </style>
 </head>
 
 <body>
 
-    <h1 class="titulo">Catálogo de Esmeraldas</h1>
+<header>
+    <div>
+        <img src="https://via.placeholder.com/120x60?text=LOGO" alt="Logo">
+        <div style="font-size:0.9rem; margin-top:5px; color:#0f3d26;">
+            Esmeraldas colombianas premium y piedras preciosas naturales.
+        </div>
+    </div>
 
-    <div id="catalogo" class="catalogo"></div>
+    <nav>
+        <a href="#categorias">Categorías de Esmeraldas</a>
+        <a href="#otras">Otras Piedras</a>
+        <a href="#certificados">Certificados</a>
+    </nav>
+</header>
 
-    <!-- JSON interno con tus productos -->
-    <script>
-        const productos = [
-            {
-                "codigo": "REF-001",
-                "nombre": "Anillo de Esmeralda Oval",
-                "precio": "350 USD",
-                "imagen": "imagenes/anillo1.png",
-                "categoria": "anillos"
-            },
-            {
-                "codigo": "REF-002",
-                "nombre": "Aretes de Esmeralda Natural",
-                "precio": "280 USD",
-                "imagen": "imagenes/aretes1.png",
-                "categoria": "aretes"
-            },
-            {
-                "codigo": "REF-003",
-                "nombre": "Dije de Esmeralda Redonda",
-                "precio": "180 USD",
-                "imagen": "imagenes/dije1.png",
-                "categoria": "dijes"
-            }
-        ];
-    </script>
+<div class="intro">
+    Descubre piezas únicas creadas con esmeraldas de origen colombiano, seleccionadas y certificadas por laboratorio gemológico propio.
+</div>
 
-    <!-- JS interno -->
-    <script>
-        function mostrarCatalogo() {
-            const contenedor = document.getElementById("catalogo");
-            contenedor.innerHTML = "";
+<!-- Buscador -->
+<div class="search-container">
+    <input type="text" id="searchInput" placeholder="Buscar productos por nombre..." onkeyup="filterProducts()">
+</div>
 
-            productos.forEach(prod => {
-                const card = document.createElement("div");
-                card.classList.add("card");
+<!-- PRODUCTOS -->
+<div class="products" id="productGrid"></div>
 
-                card.innerHTML = `
-                    <img src="${prod.imagen}" alt="${prod.nombre}">
-                    <h3>${prod.nombre}</h3>
-                    <p class="precio">${prod.precio}</p>
+<!-- CERTIFICADOS -->
+<div class="section" id="certificados">
+    <h2 style="font-family:'Playfair Display',serif; color:#0f3d26;">Certificados de Autenticidad</h2>
+    <p>
+        Todas nuestras esmeraldas pasan por un riguroso proceso de verificación interna en nuestro laboratorio gemológico. 
+        Cada pieza se entrega con su certificado físico, validando origen, tratamiento, peso, color y características ópticas.
+    </p>
+</div>
 
-                    <button class="btn-whatsapp"
-                        onclick="enviarWhatsApp('${prod.codigo}')">
-                        Comprar por WhatsApp
-                    </button>
-                `;
+<!-- POLÍTICAS -->
+<div class="section">
+    <h2 style="font-family:'Playfair Display',serif; color:#0f3d26;">Políticas de Privacidad</h2>
+    <p style="max-width:800px;">
+        Respetamos la información de nuestros clientes. Los datos proporcionados a través de WhatsApp o formularios serán utilizados únicamente para contacto comercial directo. 
+        No vendemos ni compartimos información personal con terceros.
+    </p>
+</div>
 
-                contenedor.appendChild(card);
-            });
+<footer>
+    <p>Contacto directo: WhatsApp +57 300 000 0000 · Bogotá, Colombia</p>
+    <p>
+        <a href="#">TikTok</a> |
+        <a href="#">Instagram</a> |
+        <a href="#">Laboratorio Gemológico</a>
+    </p>
+</footer>
+
+<script>
+    const whatsappNumber = "573000000000";
+
+    const products = [
+        {
+            name: "Dije de Esmeralda Circular",
+            code: "0042",
+            price: "$450.000",
+            images: ["https://via.placeholder.com/400x400?text=Esmeralda1", "https://via.placeholder.com/400x400?text=Esmeralda1B"]
+        },
+        {
+            name: "Anillo de Esmeralda Natural",
+            code: "0091",
+            price: "$1.200.000",
+            images: ["https://via.placeholder.com/400x400?text=Anillo1"]
+        },
+        {
+            name: "Aretes con Esmeraldas",
+            code: "0150",
+            price: "$680.000",
+            images: ["https://via.placeholder.com/400x400?text=Aretes"]
+        },
+        {
+            name: "Collar con Esmeralda Corte Pera",
+            code: "0077",
+            price: "$890.000",
+            images: ["https://via.placeholder.com/400x400?text=Collar"]
         }
+    ];
 
-        function enviarWhatsApp(codigo) {
-            const numero = "57XXXXXXXXX"; // ← pon tu número
-            const mensaje = `Hola, estoy interesado en el producto ${codigo}.`;
-            const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
-            window.open(url, "_blank");
-        }
+    function loadProducts() {
+        const grid = document.getElementById("productGrid");
+        grid.innerHTML = "";
 
-        mostrarCatalogo();
-    </script>
+        products.forEach((product, index) => {
+            const card = document.createElement("div");
+            card.className = "product-card";
+
+            card.innerHTML = `
+                <img src="${product.images[0]}" onclick="nextImage(${index})" id="img-${index}">
+                <div class="product-name">${product.name}</div>
+                <div class="product-code">Código: ${product.code}</div>
+                <div class="tag">Incluye certificado de autenticidad</div>
+                <div class="price">${product.price}</div>
+                <a class="btn" href="https://wa.me/${whatsappNumber}?text=Hola,%20estoy%20interesado%20en%20el%20producto%20${product.code}%20que%20vi%20en%20tu%20tienda." target="_blank">
+                    Comprar
+                </a>
+            `;
+
+            grid.appendChild(card);
+        });
+    }
+
+    function nextImage(index) {
+        const img = document.getElementById(`img-${index}`);
+        const current = img.src;
+        const arr = products[index].images;
+        const next = arr[(arr.indexOf(current) + 1) % arr.length];
+        img.src = next;
+    }
+
+    function filterProducts() {
+        const value = document.getElementById("searchInput").value.toLowerCase();
+        const filtered = products.filter(p => p.name.toLowerCase().includes(value));
+        const grid = document.getElementById("productGrid");
+
+        grid.innerHTML = "";
+
+        filtered.forEach((product, index) => {
+            const card = document.createElement("div");
+            card.className = "product-card";
+
+            card.innerHTML = `
+                <img src="${product.images[0]}" onclick="nextImage(${index})" id="img-${index}">
+                <div class="product-name">${product.name}</div>
+                <div class="product-code">Código: ${product.code}</div>
+                <div class="tag">Incluye certificado de autenticidad</div>
+                <div class="price">${product.price}</div>
+                <a class="btn" href="https://wa.me/${whatsappNumber}?text=Hola,%20estoy%20interesado%20en%20el%20producto%20${product.code}%20que%20vi%20en%20tu%20tienda." target="_blank">
+                    Comprar
+                </a>
+            `;
+
+            grid.appendChild(card);
+        });
+    }
+
+    loadProducts();
+</script>
 
 </body>
 </html>
-
 
