@@ -1,294 +1,266 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Esmeraldarte – Joyas y Esmeraldas</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Esmeraldarte | Catálogo Oficial</title>
 
 <style>
-    body {
-        font-family: 'Segoe UI', sans-serif;
-        background: #f8f8f8;
-        margin: 0;
-        padding: 0;
-        color: #1d3b32;
-    }
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f6f6f6;
+    color: #0c3b2e;
+}
 
-    header {
-        background: linear-gradient(135deg, #0c3b2e, #138f6a);
-        padding: 25px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        color: white;
-    }
+header {
+    background: linear-gradient(135deg, #0c3b2e, #138f6a);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
 
-    header img {
-        height: 70px;
-    }
+header img { height: 70px; }
 
-    nav a {
-        color: white;
-        margin-left: 25px;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 18px;
-    }
+nav a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+}
+nav a:hover { color: gold; }
 
-    nav a:hover {
-        color: gold;
-    }
+.portada {
+    background: white;
+    padding: 40px;
+    text-align: center;
+}
 
-    .portada {
-        text-align: center;
-        padding: 40px;
-        background: white;
-        font-size: 20px;
-        color: #0c3b2e;
-    }
+.search-box {
+    text-align: center;
+    margin: 20px;
+}
+.search-box input {
+    width: 320px;
+    padding: 12px;
+    border-radius: 30px;
+    border: 2px solid #0c3b2e;
+}
 
-    /* Buscador */
-    .search-box {
-        text-align: center;
-        margin: 20px 0;
-    }
+/* SECCIONES */
+section { display: none; padding: 20px; }
+section.active { display: block; }
 
-    .search-box input {
-        width: 300px;
-        padding: 12px;
-        border-radius: 30px;
-        border: 2px solid #0c3b2e;
-        outline: none;
-    }
+/* SUBCATEGORÍAS */
+.subcategorias {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.subcategorias button {
+    background: #138f6a;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    margin: 5px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.subcategorias button:hover { background: #0c3b2e; }
 
-    /* Grid de productos */
-    .productos-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 25px;
-        padding: 20px;
-    }
+/* PRODUCTOS */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+}
+.producto {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    text-align: center;
+}
+.producto img {
+    width: 100%;
+    border-radius: 10px;
+}
+.producto h3 { margin: 10px 0 5px; }
+.tag {
+    background: #0c3b2e;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-size: 13px;
+}
+.precio {
+    font-size: 18px;
+    color: #138f6a;
+    font-weight: bold;
+}
+.btn {
+    margin-top: 10px;
+    display: inline-block;
+    background: #138f6a;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+}
+.btn:hover { background: #0c3b2e; }
 
-    .producto {
-        background: white;
-        border-radius: 12px;
-        padding: 15px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-        text-align: center;
-    }
+/* WHATSAPP */
+.whatsapp {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: #25D366;
+    color: white;
+    padding: 14px 18px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+}
 
-    .producto img {
-        width: 100%;
-        border-radius: 12px;
-    }
-
-    .producto h3 {
-        margin: 10px 0 0;
-        font-size: 19px;
-    }
-
-    .certificado-tag {
-        margin-top: 5px;
-        display: inline-block;
-        padding: 5px 10px;
-        color: white;
-        background: #0c3b2e;
-        border-radius: 5px;
-        font-size: 13px;
-    }
-
-    .precio {
-        margin-top: 5px;
-        font-size: 20px;
-        font-weight: bold;
-        color: #138f6a;
-    }
-
-    .comprar-btn {
-        margin-top: 10px;
-        display: inline-block;
-        background: #138f6a;
-        color: white;
-        padding: 10px 15px;
-        border-radius: 8px;
-        text-decoration: none;
-        font-weight: bold;
-    }
-
-    .comprar-btn:hover {
-        background: #0f6d53;
-    }
-
-    /* Paginas internas */
-    section {
-        display: none;
-        padding-bottom: 40px;
-    }
-
-    section.active {
-        display: block;
-    }
-
-    /* Boton WhatsApp flotante */
-    .whatsapp-float {
-        position: fixed;
-        bottom: 25px;
-        right: 25px;
-        background: #25D366;
-        color: white;
-        padding: 14px 18px;
-        border-radius: 50px;
-        font-size: 17px;
-        text-decoration: none;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-weight: bold;
-    }
-
-    /* Footer */
-    footer {
-        background: #0c3b2e;
-        color: white;
-        padding: 30px;
-        text-align: center;
-        margin-top: 40px;
-    }
-
-    footer a {
-        color: gold;
-        text-decoration: none;
-    }
+/* FOOTER */
+footer {
+    background: #0c3b2e;
+    color: white;
+    padding: 30px;
+    text-align: center;
+    margin-top: 40px;
+}
+footer a { color: gold; text-decoration: none; }
 </style>
 </head>
 
 <body>
 
 <header>
-    <img src="https://i.imgur.com/iHR3Yf7.png" alt="Logo Esmeraldarte">
+    <img src="https://i.imgur.com/iHR3Yf7.png">
     <nav>
-        <a href="#" onclick="showPage('inicio')">Inicio</a>
-        <a href="#" onclick="showPage('esmeraldas')">Joyas de Esmeralda</a>
-        <a href="#" onclick="showPage('otrasPiedras')">Otras Piedras</a>
-        <a href="#" onclick="showPage('certificados')">Certificados</a>
+        <a onclick="show('inicio')">Inicio</a>
+        <a onclick="show('esmeraldas')">Joyas de Esmeralda</a>
+        <a onclick="show('otras')">Otras Piedras</a>
+        <a onclick="show('certificados')">Certificados</a>
+        <a href="https://esmeraldarte.github.io/ESMERALDARTE/" target="_blank">Laboratorio</a>
+        <a href="https://www.tiktok.com/@esmeraldarte" target="_blank">TikTok</a>
     </nav>
 </header>
 
 <div class="portada">
-    <h2>Esmeraldarte – Joyería Fina & Gemas Colombianas</h2>
-    <p>Tradición, elegancia y autenticidad certificada.</p>
+    <h2>Esmeraldarte</h2>
+    <p>Joyería fina en esmeraldas colombianas certificadas</p>
 </div>
 
-<!-- Buscador -->
 <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Buscar productos..." onkeyup="filtrarProductos()">
+    <input type="text" id="search" placeholder="Buscar por nombre o código..." onkeyup="buscar()">
 </div>
 
-<!-- INICIO (por defecto) -->
 <section id="inicio" class="active">
-    <h2 style="text-align:center;margin-top:20px;">Catálogo General</h2>
-    <div id="productosContainer" class="productos-grid"></div>
+    <div class="grid" id="inicioGrid"></div>
 </section>
 
-<!-- JOYAS DE ESMERALDA -->
 <section id="esmeraldas">
-    <h2 style="text-align:center;margin-top:20px;">Joyas de Esmeralda</h2>
-    <div id="esmeraldasContainer" class="productos-grid"></div>
-</section>
+    <h2>Joyas de Esmeralda</h2>
 
-<!-- OTRAS PIEDRAS -->
-<section id="otrasPiedras">
-    <h2 style="text-align:center;margin-top:20px;">Otras Piedras Preciosas</h2>
-    <div id="otrasContainer" class="productos-grid"></div>
-</section>
-
-<!-- CERTIFICADOS -->
-<section id="certificados">
-    <h2 style="text-align:center;margin-top:20px;">Certificados de Autenticidad</h2>
-    <p style="padding:20px;text-align:center;font-size:17px;">
-        Todas nuestras esmeraldas y gemas pasan por análisis gemológicos profesionales.
-        Trabajamos con laboratorio propio especializado en esmeraldas colombianas.
-    </p>
-    <div style="text-align:center;">
-        <img src="https://i.imgur.com/YH5QAId.jpeg" style="width:50%;border-radius:15px;">
+    <div class="subcategorias">
+        <button onclick="filtrar('anillo')">Anillos</button>
+        <button onclick="filtrar('arete')">Aretes</button>
+        <button onclick="filtrar('collar')">Collares</button>
+        <button onclick="filtrar('pulsera')">Pulseras</button>
+        <button onclick="filtrar('dije')">Dijes</button>
+        <button onclick="filtrar('piedra')">Piedras</button>
     </div>
+
+    <div class="grid" id="esmeraldasGrid"></div>
 </section>
 
-<!-- FOOTER -->
+<section id="otras">
+    <h2>Otras Piedras Preciosas</h2>
+    <div class="grid" id="otrasGrid"></div>
+</section>
+
+<section id="certificados">
+    <h2>Certificados Gemológicos</h2>
+    <p>
+        Todas nuestras esmeraldas incluyen certificación gemológica emitida por
+        nuestro laboratorio especializado en esmeraldas colombianas.
+    </p>
+    <img src="https://i.imgur.com/YH5QAId.jpeg" style="width:50%;border-radius:15px;">
+</section>
+
 <footer>
-    <p><strong>Políticas de Privacidad:</strong> Toda la información suministrada por el cliente es tratada con estricta confidencialidad. No compartimos datos con terceros. Las imágenes, productos y certificados aquí publicados son propiedad de Esmeraldarte.</p>
-    <p>Contacto: WhatsApp +57 318 484 8399 – TikTok: <a href="https://www.tiktok.com/@esmeraldarte" target="_blank">@esmeraldarte</a></p>
-    <p>Laboratorio Gemológico: <a href="https://esmeraldarte.github.io/ESMERALDARTE/" target="_blank">Visitar sitio</a></p>
+    <p><strong>Políticas de privacidad:</strong> La información del cliente es confidencial
+    y no se comparte con terceros.</p>
+    <p>WhatsApp: +57 318 484 8399</p>
+    <p>Laboratorio: <a href="https://esmeraldarte.github.io/ESMERALDARTE/" target="_blank">Visitar</a></p>
 </footer>
 
-<!-- BOTÓN WHATSAPP FLOTANTE -->
-<a class="whatsapp-float" href="https://wa.me/573184848399?text=Hola,%20necesito%20información" target="_blank">
-    WhatsApp – Contáctanos
+<a class="whatsapp" href="https://wa.me/573184848399?text=Hola,%20necesito%20información" target="_blank">
+    WhatsApp
 </a>
 
 <script>
-/* ---- SIMULACIÓN DE PRODUCTOS ---- */
 const productos = [
-    {titulo:"Dije de Esmeralda", codigo:"001", precio:"$450.000", categoria:"esmeraldas", img:"https://i.imgur.com/YH5QAId.jpeg"},
-    {titulo:"Anillo Esmeralda Oval", codigo:"002", precio:"$780.000", categoria:"esmeraldas", img:"https://i.imgur.com/tgYckuM.jpeg"},
-    {titulo:"Aretes Esmeralda Classic", codigo:"003", precio:"$620.000", categoria:"esmeraldas", img:"https://i.imgur.com/oDycHPF.jpeg"},
-    {titulo:"Pulsera de Esmeraldas", codigo:"004", precio:"$950.000", categoria:"esmeraldas", img:"https://i.imgur.com/YH5QAId.jpeg"},
-    {titulo:"Collar de Esmeralda Real", codigo:"005", precio:"$1.200.000", categoria:"esmeraldas", img:"https://i.imgur.com/tgYckuM.jpeg"},
-    {titulo:"Piedra en Bruto Esmeralda", codigo:"006", precio:"$380.000", categoria:"esmeraldas", img:"https://i.imgur.com/oDycHPF.jpeg"},
-
-    /* Otras Piedras */
-    {titulo:"Dije Rubí Natural", codigo:"101", precio:"$300.000", categoria:"otras", img:"https://i.imgur.com/YH5QAId.jpeg"},
-    {titulo:"Anillo Zafiro Azul", codigo:"102", precio:"$520.000", categoria:"otras", img:"https://i.imgur.com/tgYckuM.jpeg"},
-    {titulo:"Pulsera de Cuarzo Rosa", codigo:"103", precio:"$90.000", categoria:"otras", img:"https://i.imgur.com/oDycHPF.jpeg"},
-    {titulo:"Collar Amatista", codigo:"104", precio:"$150.000", categoria:"otras", img:"https://i.imgur.com/YH5QAId.jpeg"},
+ {n:"Anillo Esmeralda Clásico",c:"001",cat:"anillo",img:"https://i.imgur.com/YH5QAId.jpeg",precio:"$780.000"},
+ {n:"Aretes Esmeralda Sol",c:"002",cat:"arete",img:"https://i.imgur.com/tgYckuM.jpeg",precio:"$620.000"},
+ {n:"Collar Esmeralda Real",c:"003",cat:"collar",img:"https://i.imgur.com/oDycHPF.jpeg",precio:"$1.200.000"},
+ {n:"Pulsera de Esmeraldas",c:"004",cat:"pulsera",img:"https://i.imgur.com/YH5QAId.jpeg",precio:"$950.000"},
+ {n:"Dije Gota Verde",c:"005",cat:"dije",img:"https://i.imgur.com/tgYckuM.jpeg",precio:"$450.000"},
+ {n:"Piedra Esmeralda Natural",c:"006",cat:"piedra",img:"https://i.imgur.com/oDycHPF.jpeg",precio:"$380.000"},
+ {n:"Anillo Zafiro Azul",c:"101",cat:"otra",img:"https://i.imgur.com/YH5QAId.jpeg",precio:"$520.000"},
+ {n:"Collar Amatista",c:"102",cat:"otra",img:"https://i.imgur.com/tgYckuM.jpeg",precio:"$150.000"}
 ];
 
-/* ---- RENDERIZADO ---- */
-function renderProductos() {
-    let general = document.getElementById("productosContainer");
-    let esmeraldas = document.getElementById("esmeraldasContainer");
-    let otras = document.getElementById("otrasContainer");
-
-    productos.forEach(p => {
-        let card = `
-        <div class="producto" data-title="${p.titulo.toLowerCase()}">
-            <img src="${p.img}">
-            <h3>${p.titulo}</h3>
-            <p>Código: ${p.codigo}</p>
-            <div class="certificado-tag">Incluye certificado</div>
-            <div class="precio">${p.precio}</div>
-            <button class="comprar-btn" onclick="buyProduct('${p.codigo}')">Comprar vía WhatsApp</button>
-        </div>
-        `;
-
-        general.innerHTML += card;
-        if (p.categoria === "esmeraldas") esmeraldas.innerHTML += card;
-        if (p.categoria === "otras") otras.innerHTML += card;
-    });
+function render() {
+ let i="", e="", o="";
+ productos.forEach(p=>{
+  let card=`<div class="producto" data-n="${p.n.toLowerCase()} ${p.c}">
+  <img src="${p.img}">
+  <h3>${p.n}</h3>
+  <p>Código ${p.c}</p>
+  <span class="tag">Incluye certificado</span>
+  <div class="precio">${p.precio}</div>
+  <button class="btn" onclick="buy('${p.c}')">Comprar vía WhatsApp</button>
+  </div>`;
+  i+=card;
+  if(p.cat!=="otra") e+=card;
+  if(p.cat==="otra") o+=card;
+ });
+ inicioGrid.innerHTML=i;
+ esmeraldasGrid.innerHTML=e;
+ otrasGrid.innerHTML=o;
 }
-renderProductos();
+render();
 
-/* ---- WHATSAPP AUTO ---- */
-function buyProduct(code) {
-    let msg = `Hola, estoy interesado en el producto ${code} que vi en tu tienda.`;
-    let url = "https://wa.me/573184848399?text=" + encodeURIComponent(msg);
-    window.open(url, "_blank");
+function filtrar(cat){
+ esmeraldasGrid.innerHTML="";
+ productos.filter(p=>p.cat===cat).forEach(p=>{
+  esmeraldasGrid.innerHTML+=document.querySelector(`[data-n*="${p.c}"]`).outerHTML;
+ });
 }
 
-/* ---- CAMBIO DE PÁGINAS ---- */
-function showPage(id) {
-    document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
-    document.getElementById(id).classList.add("active");
-    window.scrollTo(0,0);
+function buscar(){
+ let q=search.value.toLowerCase();
+ document.querySelectorAll(".producto").forEach(p=>{
+  p.style.display=p.dataset.n.includes(q)?"block":"none";
+ });
 }
 
-/* ---- BUSCADOR ---- */
-function filtrarProductos() {
-    let valor = document.getElementById("searchInput").value.toLowerCase();
-    document.querySelectorAll(".producto").forEach(prod => {
-        prod.style.display = prod.dataset.title.includes(valor) ? "block" : "none";
-    });
+function buy(c){
+ let m=`Hola, estoy interesado en el producto ${c} que vi en tu tienda.`;
+ window.open("https://wa.me/573184848399?text="+encodeURIComponent(m));
+}
+
+function show(id){
+ document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+ document.getElementById(id).classList.add("active");
+ window.scrollTo(0,0);
 }
 </script>
 
