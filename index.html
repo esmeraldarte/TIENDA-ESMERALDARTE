@@ -40,7 +40,7 @@ nav{
 nav button, nav a{
     background:rgba(255,255,255,.15);
     color:white;
-    border:1px solid rgba(255,255,255,.3);
+    border:1px solid rgba(255,255,255,.25);
     padding:10px 18px;
     border-radius:22px;
     font-weight:600;
@@ -217,7 +217,7 @@ footer{
 
 <div class="hero">
 <h1>Alta Joyería en Esmeraldas Colombianas</h1>
-<p>Piezas únicas, certificadas y verificadas gemológicamente</p>
+<p>Piezas únicas certificadas – Esmeraldarte</p>
 </div>
 
 <div class="search">
@@ -286,7 +286,7 @@ document.write(products.map(p=>`
 <div class="code">Código: ${p[1]}</div>
 <div class="badge">Incluye certificado</div>
 <div class="price">$1.500.000 COP</div>
-<button class="buy" onclick="buy('${p[1]}')">Comprar vía WhatsApp</button>
+<button class="buy" onclick="buyProduct('${p[1]}')">Comprar vía WhatsApp</button>
 </div>
 `).join(""));
 </script>
@@ -308,7 +308,7 @@ document.write(otras.map((o,i)=>`
 <h3>${o}</h3>
 <div class="code">Código: OP-${i+1}</div>
 <div class="price">$950.000 COP</div>
-<button class="buy" onclick="buy('OP-${i+1}')">Comprar vía WhatsApp</button>
+<button class="buy" onclick="buyProduct('OP-${i+1}')">Comprar vía WhatsApp</button>
 </div>
 `).join(""));
 </script>
@@ -317,7 +317,7 @@ document.write(otras.map((o,i)=>`
 
 <section id="certificados">
 <h2>Certificación Gemológica</h2>
-<p>Todas nuestras esmeraldas son analizadas y certificadas por nuestro laboratorio especializado.</p>
+<p>Todas nuestras esmeraldas son analizadas y certificadas por el laboratorio gemológico Esmeraldarte.</p>
 </section>
 
 <footer>
@@ -326,7 +326,9 @@ document.write(otras.map((o,i)=>`
 <p>Contacto: +57 318 484 8399</p>
 </footer>
 
-<a class="whatsapp" href="https://wa.me/573184848399" target="_blank">Comunícate con nosotros</a>
+<a class="whatsapp" href="https://wa.me/573184848399?text=Hola,%20estoy%20interesado%20en%20conocer%20más%20sobre%20las%20esmeraldas%20de%20Esmeraldarte." target="_blank">
+Comunícate con nosotros
+</a>
 
 <script>
 function showSection(id){
@@ -344,8 +346,8 @@ document.querySelectorAll(".product").forEach(p=>{
 p.style.display=p.innerText.toLowerCase().includes(t)?"block":"none";
 });
 }
-function buy(code){
-let msg=`Hola, estoy interesado en el producto ${code} que vi en tu tienda.`;
+function buyProduct(code){
+let msg=`Hola, estoy interesado en conocer más sobre el producto ${code} que vi en tu tienda.`;
 window.open(`https://wa.me/573184848399?text=${encodeURIComponent(msg)}`,"_blank");
 }
 function slide(btn,dir){
@@ -359,5 +361,6 @@ imgs[i].classList.add("active");
 
 </body>
 </html>
+
 
 
