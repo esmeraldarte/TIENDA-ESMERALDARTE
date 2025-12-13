@@ -239,47 +239,43 @@ footer{
 
 <div class="grid">
 
-<!-- 30 PRODUCTOS (EJEMPLOS) -->
-<!-- Anillos -->
 <script>
 let products = [
-["Anillo Esmeralda Clásico","A-001","anillo"],
-["Anillo Oro Blanco","A-002","anillo"],
-["Anillo Corte Oval","A-003","anillo"],
-["Anillo Alta Joyería","A-004","anillo"],
+["Anillo Esmeralda Clásico","A-001","anillo", ["https://i.imgur.com/1.jpg","https://i.imgur.com/2.jpg","https://i.imgur.com/3.jpg"]],
+["Anillo Oro Blanco","A-002","anillo", ["https://i.imgur.com/4.jpg","https://i.imgur.com/5.jpg","https://i.imgur.com/6.jpg"]],
+["Anillo Corte Oval","A-003","anillo", ["https://i.imgur.com/7.jpg","https://i.imgur.com/8.jpg","https://i.imgur.com/9.jpg"]],
+["Anillo Alta Joyería","A-004","anillo", ["https://i.imgur.com/10.jpg","https://i.imgur.com/11.jpg","https://i.imgur.com/12.jpg"]],
 
-["Aretes Gota","AR-001","arete"],
-["Aretes Corte Princesa","AR-002","arete"],
-["Aretes Oro 18k","AR-003","arete"],
-["Aretes Minimal","AR-004","arete"],
+["Aretes Gota","AR-001","arete", ["https://i.imgur.com/13.jpg","https://i.imgur.com/14.jpg","https://i.imgur.com/15.jpg"]],
+["Aretes Corte Princesa","AR-002","arete", ["https://i.imgur.com/16.jpg","https://i.imgur.com/17.jpg","https://i.imgur.com/18.jpg"]],
+["Aretes Oro 18k","AR-003","arete", ["https://i.imgur.com/19.jpg","https://i.imgur.com/20.jpg","https://i.imgur.com/21.jpg"]],
+["Aretes Minimal","AR-004","arete", ["https://i.imgur.com/22.jpg","https://i.imgur.com/23.jpg","https://i.imgur.com/24.jpg"]],
 
-["Dije Esmeralda Natural","D-001","dije"],
-["Dije Corte Rectangular","D-002","dije"],
-["Dije Clásico","D-003","dije"],
-["Dije Premium","D-004","dije"],
+["Dije Esmeralda Natural","D-001","dije", ["https://i.imgur.com/25.jpg","https://i.imgur.com/26.jpg","https://i.imgur.com/27.jpg"]],
+["Dije Corte Rectangular","D-002","dije", ["https://i.imgur.com/28.jpg","https://i.imgur.com/29.jpg","https://i.imgur.com/30.jpg"]],
+["Dije Clásico","D-003","dije", ["https://i.imgur.com/31.jpg","https://i.imgur.com/32.jpg","https://i.imgur.com/33.jpg"]],
+["Dije Premium","D-004","dije", ["https://i.imgur.com/34.jpg","https://i.imgur.com/35.jpg","https://i.imgur.com/36.jpg"]],
 
-["Collar Esmeralda","C-001","collar"],
-["Collar Alta Joyería","C-002","collar"],
-["Collar Clásico","C-003","collar"],
-["Collar Minimal","C-004","collar"],
+["Collar Esmeralda","C-001","collar", ["https://i.imgur.com/37.jpg","https://i.imgur.com/38.jpg","https://i.imgur.com/39.jpg"]],
+["Collar Alta Joyería","C-002","collar", ["https://i.imgur.com/40.jpg","https://i.imgur.com/41.jpg","https://i.imgur.com/42.jpg"]],
+["Collar Clásico","C-003","collar", ["https://i.imgur.com/43.jpg","https://i.imgur.com/44.jpg","https://i.imgur.com/45.jpg"]],
+["Collar Minimal","C-004","collar", ["https://i.imgur.com/46.jpg","https://i.imgur.com/47.jpg","https://i.imgur.com/48.jpg"]],
 
-["Pulsera Esmeralda","P-001","pulsera"],
-["Pulsera Oro","P-002","pulsera"],
-["Pulsera Clásica","P-003","pulsera"],
-["Pulsera Premium","P-004","pulsera"],
+["Pulsera Esmeralda","P-001","pulsera", ["https://i.imgur.com/49.jpg","https://i.imgur.com/50.jpg","https://i.imgur.com/51.jpg"]],
+["Pulsera Oro","P-002","pulsera", ["https://i.imgur.com/52.jpg","https://i.imgur.com/53.jpg","https://i.imgur.com/54.jpg"]],
+["Pulsera Clásica","P-003","pulsera", ["https://i.imgur.com/55.jpg","https://i.imgur.com/56.jpg","https://i.imgur.com/57.jpg"]],
+["Pulsera Premium","P-004","pulsera", ["https://i.imgur.com/58.jpg","https://i.imgur.com/59.jpg","https://i.imgur.com/60.jpg"]],
 
-["Esmeralda Natural","E-001","piedra"],
-["Esmeralda Corte Oval","E-002","piedra"],
-["Esmeralda Bruta","E-003","piedra"],
-["Esmeralda Premium","E-004","piedra"]
+["Esmeralda Natural","E-001","piedra", ["https://i.imgur.com/61.jpg","https://i.imgur.com/62.jpg","https://i.imgur.com/63.jpg"]],
+["Esmeralda Corte Oval","E-002","piedra", ["https://i.imgur.com/64.jpg","https://i.imgur.com/65.jpg","https://i.imgur.com/66.jpg"]],
+["Esmeralda Bruta","E-003","piedra", ["https://i.imgur.com/67.jpg","https://i.imgur.com/68.jpg","https://i.imgur.com/69.jpg"]],
+["Esmeralda Premium","E-004","piedra", ["https://i.imgur.com/70.jpg","https://i.imgur.com/71.jpg","https://i.imgur.com/72.jpg"]]
 ];
 
 document.write(products.map(p=>`
 <div class="product ${p[2]}">
 <div class="slider">
-<img src="https://i.imgur.com/YH5QAId.jpeg" class="active">
-<img src="https://i.imgur.com/tgYckuM.jpeg">
-<img src="https://i.imgur.com/oDycHPF.jpeg">
+${p[3].map((img,i)=>`<img src="${img}" ${i===0?"class='active'":""}>`).join("")}
 <button class="prev" onclick="slide(this,-1)">‹</button>
 <button class="next" onclick="slide(this,1)">›</button>
 </div>
@@ -299,17 +295,26 @@ document.write(products.map(p=>`
 <section id="otras">
 <div class="grid">
 <script>
-let otras = ["Zafiro Azul","Rubí Natural","Diamante","Amatista","Topacio","Citrino"];
-document.write(otras.map((o,i)=>`
+let otras = [
+["Zafiro Azul","OP-001",["https://i.imgur.com/73.jpg","https://i.imgur.com/74.jpg"]],
+["Rubí Natural","OP-002",["https://i.imgur.com/75.jpg","https://i.imgur.com/76.jpg"]],
+["Diamante","OP-003",["https://i.imgur.com/77.jpg","https://i.imgur.com/78.jpg"]],
+["Amatista","OP-004",["https://i.imgur.com/79.jpg","https://i.imgur.com/80.jpg"]],
+["Topacio","OP-005",["https://i.imgur.com/81.jpg","https://i.imgur.com/82.jpg"]],
+["Citrino","OP-006",["https://i.imgur.com/83.jpg","https://i.imgur.com/84.jpg"]]
+];
+
+document.write(otras.map(p=>`
 <div class="product">
 <div class="slider">
-<img src="https://i.imgur.com/YH5QAId.jpeg" class="active">
-<img src="https://i.imgur.com/tgYckuM.jpeg">
+${p[2].map((img,i)=>`<img src="${img}" ${i===0?"class='active'":""}>`).join("")}
+<button class="prev" onclick="slide(this,-1)">‹</button>
+<button class="next" onclick="slide(this,1)">›</button>
 </div>
-<h3>${o}</h3>
-<div class="code">Código: OP-${i+1}</div>
+<h3>${p[0]}</h3>
+<div class="code">Código: ${p[1]}</div>
 <div class="price">$950.000 COP</div>
-<button class="buy" onclick="buyProduct('OP-${i+1}')">Comprar vía WhatsApp</button>
+<button class="buy" onclick="buyProduct('${p[1]}')">Comprar vía WhatsApp</button>
 </div>
 `).join(""));
 </script>
@@ -389,6 +394,4 @@ imgs[i].classList.add("active");
 
 </body>
 </html>
-
-
 
