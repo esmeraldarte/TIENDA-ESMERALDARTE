@@ -1,197 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Esmeraldarte | Joyería de Esmeraldas</title>
+
 <style>
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: #f6f6f6;
-    color: #0c3b2e;
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:#f5f5f5;
+    color:#0c3b2e;
+}
+header{
+    background:linear-gradient(135deg,#0c3b2e,#138f6a);
+    color:#fff;
+    padding:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+}
+header img{height:60px}
+nav{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+}
+nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:600;
+}
+nav a:hover{color:gold}
+
+.portada{
+    background:white;
+    padding:50px 20px;
+    text-align:center;
+}
+.portada h2{
+    font-size:28px;
+    margin-bottom:10px;
 }
 
-/* HEADER */
-header {
-    background: linear-gradient(135deg, #0c3b2e, #138f6a);
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
-    flex-wrap: wrap;
+.search-box{
+    text-align:center;
+    margin:25px;
+}
+.search-box input{
+    width:320px;
+    max-width:90%;
+    padding:14px;
+    border-radius:30px;
+    border:2px solid #0c3b2e;
 }
 
-header img {
-    height: 65px;
+section{display:none;padding:25px}
+section.active{display:block}
+
+.subcategorias{
+    text-align:center;
+    margin-bottom:30px;
+}
+.subcategorias button{
+    background:#138f6a;
+    color:white;
+    border:none;
+    padding:10px 18px;
+    margin:6px;
+    border-radius:20px;
+    cursor:pointer;
+}
+.subcategorias button:hover{background:#0c3b2e}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:30px;
 }
 
-/* NAV */
-nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
+.producto{
+    background:white;
+    border-radius:16px;
+    padding:18px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    text-align:center;
+}
+.producto img{
+    width:100%;
+    border-radius:14px;
+}
+.producto h3{
+    margin:15px 0 5px;
+}
+.codigo{
+    font-size:14px;
+    color:#666;
+}
+.tag{
+    margin-top:12px;
+    display:inline-block;
+    padding:6px 14px;
+    border-radius:20px;
+    background:rgba(12,59,46,.08);
+    font-size:13px;
+    font-weight:600;
+}
+.precio{
+    margin-top:18px;
+    font-size:20px;
+    font-weight:bold;
+    color:#138f6a;
+}
+.btn{
+    margin-top:18px;
+    background:linear-gradient(135deg,#138f6a,#0c3b2e);
+    color:white;
+    border:none;
+    padding:12px;
+    width:100%;
+    border-radius:25px;
+    font-weight:600;
+    cursor:pointer;
 }
 
-nav a {
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 16px;
-}
-nav a:hover { color: gold; }
-
-/* PORTADA */
-.portada {
-    background: white;
-    padding: 45px 20px;
-    text-align: center;
-}
-.portada h2 {
-    font-size: 28px;
-    letter-spacing: 1px;
+.whatsapp-float{
+    position:fixed;
+    bottom:22px;
+    right:22px;
+    background:#25D366;
+    color:white;
+    padding:14px 22px;
+    border-radius:50px;
+    text-decoration:none;
+    font-weight:bold;
+    box-shadow:0 6px 18px rgba(0,0,0,.3);
 }
 
-/* BUSCADOR */
-.search-box {
-    text-align: center;
-    margin: 25px;
+footer{
+    background:#0c3b2e;
+    color:white;
+    padding:40px 20px;
+    text-align:center;
+    margin-top:60px;
 }
-.search-box input {
-    width: 320px;
-    max-width: 90%;
-    padding: 14px;
-    border-radius: 30px;
-    border: 2px solid #0c3b2e;
-    font-size: 15px;
-}
+footer a{color:gold;text-decoration:none}
 
-/* SECCIONES */
-section { display: none; padding: 20px; }
-section.active { display: block; }
-
-/* SUBCATEGORÍAS */
-.subcategorias {
-    text-align: center;
-    margin-bottom: 30px;
-}
-.subcategorias button {
-    background: #138f6a;
-    color: white;
-    border: none;
-    padding: 10px 18px;
-    margin: 6px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: 600;
-}
-.subcategorias button:hover {
-    background: #0c3b2e;
-}
-
-/* GRID PRODUCTOS */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 30px;
-}
-
-/* PRODUCTO */
-.producto {
-    background: white;
-    border-radius: 16px;
-    padding: 18px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    text-align: center;
-    transition: transform 0.3s ease;
-}
-.producto:hover {
-    transform: translateY(-4px);
-}
-
-.producto img {
-    width: 100%;
-    border-radius: 14px;
-}
-
-.producto h3 {
-    margin: 15px 0 6px;
-    font-size: 18px;
-    font-weight: 600;
-}
-
-/* SELLO CERTIFICADO */
-.tag {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 13px;
-    background: rgba(12,59,46,0.08);
-    color: #0c3b2e;
-    font-weight: 600;
-}
-
-/* PRECIO */
-.precio {
-    margin-top: 18px;
-    font-size: 20px;
-    font-weight: bold;
-    color: #138f6a;
-}
-
-/* BOTÓN */
-.btn {
-    margin-top: 18px;
-    background: linear-gradient(135deg, #138f6a, #0c3b2e);
-    color: white;
-    padding: 12px 18px;
-    border-radius: 25px;
-    cursor: pointer;
-    border: none;
-    font-weight: 600;
-    width: 100%;
-}
-.btn:hover {
-    opacity: 0.9;
-}
-
-/* WHATSAPP */
-.whatsapp {
-    position: fixed;
-    bottom: 22px;
-    right: 22px;
-    background: #25D366;
-    color: white;
-    padding: 14px 20px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: bold;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.3);
-}
-
-/* FOOTER */
-footer {
-    background: #0c3b2e;
-    color: white;
-    padding: 35px 20px;
-    text-align: center;
-    margin-top: 60px;
-}
-footer a {
-    color: gold;
-    text-decoration: none;
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        gap: 15px;
-        text-align: center;
-    }
-
-    nav {
-        justify-content: center;
-    }
-
-    .grid {
-        grid-template-columns: 1fr;
-    }
+@media(max-width:768px){
+    header{flex-direction:column;gap:15px;text-align:center}
+    nav{justify-content:center}
 }
 </style>
+</head>
+
+<body>
+
+<header>
+    <img src="https://i.imgur.com/iHR3Yf7.png">
+    <nav>
+        <a onclick="showSection('joyas')">Joyas de Esmeralda</a>
+        <a onclick="showSection('otras')">Otras Piedras</a>
+        <a onclick="showSection('certificados')">Certificados</a>
+        <a href="https://esmeraldarte.github.io/ESMERALDARTE/" target="_blank">Laboratorio</a>
+        <a href="https://www.tiktok.com/@esmeraldarte" target="_blank">TikTok</a>
+    </nav>
+</header>
+
+<div class="portada">
+    <h2>Joyería en Esmeraldas Colombianas</h2>
+    <p>Piezas únicas certificadas – Esmeraldarte</p>
+</div>
+
+<div class="search-box">
+    <input type="text" placeholder="Buscar producto..." onkeyup="filterProducts(this.value)">
+</div>
+
+<section id="joyas" class="active">
+    <div class="subcategorias">
+        <button onclick="filterCategory('anillo')">Anillos</button>
+        <button onclick="filterCategory('collar')">Collares</button>
+        <button onclick="filterCategory('dije')">Dijes</button>
+        <button onclick="filterCategory('arete')">Aretes</button>
+        <button onclick="filterCategory('piedra')">Piedras</button>
+        <button onclick="filterCategory('all')">Ver todo</button>
+    </div>
+
+    <div class="grid">
+        <div class="producto anillo">
+            <img src="https://i.imgur.com/YH5QAId.jpeg">
+            <h3>Anillo de Esmeralda</h3>
+            <div class="codigo">Código: 0042</div>
+            <div class="tag">Incluye certificado</div>
+            <div class="precio">$3.500.000 COP</div>
+            <button class="btn" onclick="buyProduct('0042')">Comprar vía WhatsApp</button>
+        </div>
+
+        <div class="producto dije">
+            <img src="https://i.imgur.com/tgYckuM.jpeg">
+            <h3>Dije de Esmeralda</h3>
+            <div class="codigo">Código: 0051</div>
+            <div class="tag">Incluye certificado</div>
+            <div class="precio">$1.200.000 COP</div>
+            <button class="btn" onclick="buyProduct('0051')">Comprar vía WhatsApp</button>
+        </div>
+    </div>
+</section>
+
+<section id="otras">
+    <div class="grid">
+        <div class="producto">
+            <img src="https://i.imgur.com/oDycHPF.jpeg">
+            <h3>Zafiro Azul</h3>
+            <div class="codigo">Código: ZF-12</div>
+            <div class="precio">$950.000 COP</div>
+            <button class="btn" onclick="buyProduct('ZF-12')">Comprar vía WhatsApp</button>
+        </div>
+    </div>
+</section>
+
+<section id="certificados">
+    <h2>Certificación Gemológica</h2>
+    <p>Todas nuestras esmeraldas incluyen certificación técnica emitida por nuestro laboratorio gemológico Esmeraldarte.</p>
+</section>
+
+<footer>
+    <p><strong>Política de Privacidad</strong></p>
+    <p>La información compartida será utilizada únicamente para fines comerciales y de contacto.</p>
+    <p>Contacto: +57 318 484 8399</p>
+</footer>
+
+<a class="whatsapp-float" href="https://wa.me/573184848399" target="_blank">
+    Comunícate con nosotros
+</a>
+
+<script>
+function showSection(id){
+    document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+}
+
+function filterProducts(text){
+    text=text.toLowerCase();
+    document.querySelectorAll(".producto").forEach(p=>{
+        p.style.display=p.innerText.toLowerCase().includes(text)?"block":"none";
+    });
+}
+
+function filterCategory(cat){
+    document.querySelectorAll(".producto").forEach(p=>{
+        p.style.display=(cat==="all"||p.classList.contains(cat))?"block":"none";
+    });
+}
+
+function buyProduct(code){
+    let msg=`Hola, estoy interesado en el producto ${code} que vi en tu tienda.`;
+    window.open(`https://wa.me/573184848399?text=${encodeURIComponent(msg)}`,"_blank");
+}
+</script>
+
+</body>
+</html>
+
