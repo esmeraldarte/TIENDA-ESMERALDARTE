@@ -3,128 +3,179 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Esmeraldarte | Joyería de Esmeraldas</title>
+<title>Esmeraldarte | Alta Joyería en Esmeraldas</title>
 
 <style>
+:root{
+    --verde:#0c3b2e;
+    --verde2:#138f6a;
+    --oro:#d4af37;
+}
+
 body{
     margin:0;
     font-family:'Segoe UI',sans-serif;
-    background:#f5f5f5;
-    color:#0c3b2e;
+    background:#f4f4f4;
+    color:var(--verde);
 }
+
+/* HEADER */
 header{
-    background:linear-gradient(135deg,#0c3b2e,#138f6a);
-    color:#fff;
-    padding:20px;
+    background:linear-gradient(135deg,var(--verde),var(--verde2));
+    padding:32px 40px;
     display:flex;
     justify-content:space-between;
     align-items:center;
     flex-wrap:wrap;
 }
-header img{height:60px}
+header img{
+    height:80px;
+}
 nav{
     display:flex;
-    gap:15px;
+    gap:22px;
     flex-wrap:wrap;
 }
 nav a{
     color:white;
     text-decoration:none;
     font-weight:600;
+    position:relative;
 }
-nav a:hover{color:gold}
+nav a::after{
+    content:"";
+    position:absolute;
+    bottom:-4px;
+    left:0;
+    width:0;
+    height:2px;
+    background:var(--oro);
+    transition:.3s;
+}
+nav a:hover::after{width:100%}
 
+/* PORTADA */
 .portada{
     background:white;
-    padding:50px 20px;
+    padding:70px 20px;
     text-align:center;
 }
 .portada h2{
-    font-size:28px;
-    margin-bottom:10px;
+    font-size:34px;
+    letter-spacing:1px;
+}
+.portada p{
+    font-size:17px;
+    color:#555;
 }
 
-.search-box{
-    text-align:center;
-    margin:25px;
-}
+/* BUSCADOR */
+.search-box{text-align:center;margin:30px}
 .search-box input{
-    width:320px;
+    width:360px;
     max-width:90%;
-    padding:14px;
+    padding:15px;
     border-radius:30px;
-    border:2px solid #0c3b2e;
+    border:2px solid var(--verde);
+    font-size:15px;
 }
 
-section{display:none;padding:25px}
+/* SECCIONES */
+section{display:none;padding:30px}
 section.active{display:block}
 
-.subcategorias{
-    text-align:center;
-    margin-bottom:30px;
-}
+/* SUBCATEGORÍAS */
+.subcategorias{text-align:center;margin-bottom:35px}
 .subcategorias button{
-    background:#138f6a;
+    background:var(--verde2);
     color:white;
     border:none;
-    padding:10px 18px;
+    padding:10px 20px;
     margin:6px;
-    border-radius:20px;
+    border-radius:22px;
     cursor:pointer;
+    font-weight:600;
 }
-.subcategorias button:hover{background:#0c3b2e}
+.subcategorias button:hover{background:var(--verde)}
 
+/* GRID */
 .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:30px;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:34px;
 }
 
+/* PRODUCTO */
 .producto{
     background:white;
-    border-radius:16px;
-    padding:18px;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
     text-align:center;
+    animation:fadeUp .8s ease both;
 }
-.producto img{
+@keyframes fadeUp{
+    from{opacity:0;transform:translateY(25px)}
+    to{opacity:1;transform:none}
+}
+
+/* SLIDER */
+.slider{
+    position:relative;
+}
+.slider img{
     width:100%;
     border-radius:14px;
+    display:none;
 }
-.producto h3{
-    margin:15px 0 5px;
+.slider img.active{display:block}
+.slider button{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    background:rgba(0,0,0,.5);
+    color:white;
+    border:none;
+    padding:6px 10px;
+    cursor:pointer;
 }
-.codigo{
-    font-size:14px;
-    color:#666;
-}
+.slider .prev{left:8px}
+.slider .next{right:8px}
+
+.producto h3{margin:15px 0 6px}
+.codigo{font-size:14px;color:#666}
+
 .tag{
-    margin-top:12px;
+    margin-top:14px;
     display:inline-block;
-    padding:6px 14px;
+    padding:6px 16px;
     border-radius:20px;
     background:rgba(12,59,46,.08);
     font-size:13px;
     font-weight:600;
 }
+
 .precio{
-    margin-top:18px;
-    font-size:20px;
+    margin-top:20px;
+    font-size:22px;
     font-weight:bold;
-    color:#138f6a;
+    color:var(--verde2);
 }
+
 .btn{
-    margin-top:18px;
-    background:linear-gradient(135deg,#138f6a,#0c3b2e);
+    margin-top:20px;
+    background:linear-gradient(135deg,var(--verde2),var(--verde));
     color:white;
     border:none;
-    padding:12px;
+    padding:14px;
     width:100%;
-    border-radius:25px;
+    border-radius:26px;
     font-weight:600;
     cursor:pointer;
 }
+.btn:hover{opacity:.9}
 
+/* WHATSAPP */
 .whatsapp-float{
     position:fixed;
     bottom:22px;
@@ -133,22 +184,24 @@ section.active{display:block}
     color:white;
     padding:14px 22px;
     border-radius:50px;
-    text-decoration:none;
     font-weight:bold;
+    text-decoration:none;
     box-shadow:0 6px 18px rgba(0,0,0,.3);
 }
 
+/* FOOTER */
 footer{
-    background:#0c3b2e;
+    background:var(--verde);
     color:white;
-    padding:40px 20px;
+    padding:45px 20px;
     text-align:center;
-    margin-top:60px;
+    margin-top:70px;
 }
-footer a{color:gold;text-decoration:none}
+footer a{color:var(--oro);text-decoration:none}
 
+/* RESPONSIVE */
 @media(max-width:768px){
-    header{flex-direction:column;gap:15px;text-align:center}
+    header{flex-direction:column;gap:18px;text-align:center}
     nav{justify-content:center}
 }
 </style>
@@ -168,7 +221,7 @@ footer a{color:gold;text-decoration:none}
 </header>
 
 <div class="portada">
-    <h2>Joyería en Esmeraldas Colombianas</h2>
+    <h2>Alta Joyería en Esmeraldas Colombianas</h2>
     <p>Piezas únicas certificadas – Esmeraldarte</p>
 </div>
 
@@ -177,88 +230,124 @@ footer a{color:gold;text-decoration:none}
 </div>
 
 <section id="joyas" class="active">
-    <div class="subcategorias">
-        <button onclick="filterCategory('anillo')">Anillos</button>
-        <button onclick="filterCategory('collar')">Collares</button>
-        <button onclick="filterCategory('dije')">Dijes</button>
-        <button onclick="filterCategory('arete')">Aretes</button>
-        <button onclick="filterCategory('piedra')">Piedras</button>
-        <button onclick="filterCategory('all')">Ver todo</button>
-    </div>
 
-    <div class="grid">
-        <div class="producto anillo">
-            <img src="https://i.imgur.com/YH5QAId.jpeg">
-            <h3>Anillo de Esmeralda</h3>
-            <div class="codigo">Código: 0042</div>
-            <div class="tag">Incluye certificado</div>
-            <div class="precio">$3.500.000 COP</div>
-            <button class="btn" onclick="buyProduct('0042')">Comprar vía WhatsApp</button>
-        </div>
+<div class="subcategorias">
+    <button onclick="filterCategory('anillo')">Anillos</button>
+    <button onclick="filterCategory('dije')">Dijes</button>
+    <button onclick="filterCategory('collar')">Collares</button>
+    <button onclick="filterCategory('pulsera')">Pulseras</button>
+    <button onclick="filterCategory('arete')">Aretes</button>
+    <button onclick="filterCategory('piedra')">Piedras</button>
+    <button onclick="filterCategory('all')">Ver todo</button>
+</div>
 
-        <div class="producto dije">
-            <img src="https://i.imgur.com/tgYckuM.jpeg">
-            <h3>Dije de Esmeralda</h3>
-            <div class="codigo">Código: 0051</div>
-            <div class="tag">Incluye certificado</div>
-            <div class="precio">$1.200.000 COP</div>
-            <button class="btn" onclick="buyProduct('0051')">Comprar vía WhatsApp</button>
-        </div>
-    </div>
+<div class="grid">
+
+<!-- PRODUCTO -->
+<div class="producto anillo">
+<div class="slider">
+<img src="https://i.imgur.com/YH5QAId.jpeg" class="active">
+<img src="https://i.imgur.com/tgYckuM.jpeg">
+<button class="prev" onclick="slide(this,-1)">‹</button>
+<button class="next" onclick="slide(this,1)">›</button>
+</div>
+<h3>Anillo de Esmeralda</h3>
+<div class="codigo">Código: 0042</div>
+<div class="tag">Incluye certificado</div>
+<div class="precio">$3.500.000 COP</div>
+<button class="btn" onclick="buyProduct('0042')">Comprar vía WhatsApp</button>
+</div>
+
+<div class="producto dije">
+<img src="https://i.imgur.com/tgYckuM.jpeg">
+<h3>Dije de Esmeralda</h3>
+<div class="codigo">Código: 0051</div>
+<div class="tag">Incluye certificado</div>
+<div class="precio">$1.200.000 COP</div>
+<button class="btn" onclick="buyProduct('0051')">Comprar vía WhatsApp</button>
+</div>
+
+<div class="producto collar">
+<img src="https://i.imgur.com/oDycHPF.jpeg">
+<h3>Collar de Esmeralda</h3>
+<div class="codigo">Código: 0063</div>
+<div class="tag">Incluye certificado</div>
+<div class="precio">$4.800.000 COP</div>
+<button class="btn" onclick="buyProduct('0063')">Comprar vía WhatsApp</button>
+</div>
+
+</div>
 </section>
 
 <section id="otras">
-    <div class="grid">
-        <div class="producto">
-            <img src="https://i.imgur.com/oDycHPF.jpeg">
-            <h3>Zafiro Azul</h3>
-            <div class="codigo">Código: ZF-12</div>
-            <div class="precio">$950.000 COP</div>
-            <button class="btn" onclick="buyProduct('ZF-12')">Comprar vía WhatsApp</button>
-        </div>
-    </div>
+<div class="grid">
+<div class="producto">
+<img src="https://i.imgur.com/YH5QAId.jpeg">
+<h3>Zafiro Azul</h3>
+<div class="codigo">Código: ZF-21</div>
+<div class="precio">$950.000 COP</div>
+<button class="btn" onclick="buyProduct('ZF-21')">Comprar vía WhatsApp</button>
+</div>
+
+<div class="producto">
+<img src="https://i.imgur.com/tgYckuM.jpeg">
+<h3>Rubí Natural</h3>
+<div class="codigo">Código: RB-09</div>
+<div class="precio">$1.450.000 COP</div>
+<button class="btn" onclick="buyProduct('RB-09')">Comprar vía WhatsApp</button>
+</div>
+</div>
 </section>
 
 <section id="certificados">
-    <h2>Certificación Gemológica</h2>
-    <p>Todas nuestras esmeraldas incluyen certificación técnica emitida por nuestro laboratorio gemológico Esmeraldarte.</p>
+<h2>Certificación Gemológica</h2>
+<p>Todas nuestras esmeraldas son analizadas y certificadas por el laboratorio gemológico Esmeraldarte bajo estándares técnicos y control interno.</p>
 </section>
 
 <footer>
-    <p><strong>Política de Privacidad</strong></p>
-    <p>La información compartida será utilizada únicamente para fines comerciales y de contacto.</p>
-    <p>Contacto: +57 318 484 8399</p>
+<p><strong>Política de Privacidad</strong></p>
+<p>La información enviada por WhatsApp será usada únicamente para contacto comercial.</p>
+<p>Contacto: +57 318 484 8399</p>
 </footer>
 
 <a class="whatsapp-float" href="https://wa.me/573184848399" target="_blank">
-    Comunícate con nosotros
+Comunícate con nosotros
 </a>
 
 <script>
 function showSection(id){
-    document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
-    document.getElementById(id).classList.add("active");
+document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
 }
 
-function filterProducts(text){
-    text=text.toLowerCase();
-    document.querySelectorAll(".producto").forEach(p=>{
-        p.style.display=p.innerText.toLowerCase().includes(text)?"block":"none";
-    });
+function filterProducts(t){
+t=t.toLowerCase();
+document.querySelectorAll(".producto").forEach(p=>{
+p.style.display=p.innerText.toLowerCase().includes(t)?"block":"none";
+});
 }
 
-function filterCategory(cat){
-    document.querySelectorAll(".producto").forEach(p=>{
-        p.style.display=(cat==="all"||p.classList.contains(cat))?"block":"none";
-    });
+function filterCategory(c){
+document.querySelectorAll(".producto").forEach(p=>{
+p.style.display=(c==="all"||p.classList.contains(c))?"block":"none";
+});
 }
 
 function buyProduct(code){
-    let msg=`Hola, estoy interesado en el producto ${code} que vi en tu tienda.`;
-    window.open(`https://wa.me/573184848399?text=${encodeURIComponent(msg)}`,"_blank");
+let msg=`Hola, estoy interesado en el producto ${code} que vi en tu tienda.`;
+window.open(`https://wa.me/573184848399?text=${encodeURIComponent(msg)}`,"_blank");
+}
+
+function slide(btn,dir){
+let imgs=btn.parentElement.querySelectorAll("img");
+let i=[...imgs].findIndex(im=>im.classList.contains("active"));
+imgs[i].classList.remove("active");
+i=(i+dir+imgs.length)%imgs.length;
+imgs[i].classList.add("active");
 }
 </script>
 
 </body>
 </html>
+
 
